@@ -26,7 +26,7 @@ $(LIB)/libft.a:
 	@gcc $(FLAGS) -c $< -o $@ -I includes
 
 exe: all
-	@./$(NAME)
+	@./$(NAME) cheese_maze.cub
 
 clean:
 	@$(RM) $(OBJS) $(DEPS)
