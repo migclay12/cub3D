@@ -27,12 +27,12 @@ typedef struct s_list
 }	t_list;
 
 int		set_bit(int *n, int bit, int val);
-int		check_bit(int n, int bit);
+int		mlx_bit(int n, int bit);
 int		not_bit(int *n, int bit);
 void	print_bits(int n);
-int		check_mask_and(int mask, int with);
-int		check_mask_not(int mask, int with);
-int		check_mask_or(int mask, int with);
+int		mlx_mask_and(int mask, int with);
+int		mlx_mask_not(int mask, int with);
+int		mlx_mask_or(int mask, int with);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

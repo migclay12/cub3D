@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_mask_not.c                                   :+:      :+:    :+:   */
+/*   mlx_mask_not.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ablanco- <ablanco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	check_mask_not(int mask, int with)
+int	mlx_mask_not(int mask, int with)
 {
 	if ((~mask & with) == with)
 		return (1);
