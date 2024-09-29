@@ -23,7 +23,7 @@ void	save_path(char **cardinal, char *line, int idx, int sum_idx)
 	idx = idx + sum_idx;
 	while (line[idx] == ' ')
 		idx++;
-	*cardinal = ft_strdup(&line[idx]);
+	*cardinal = ft_strdup(&line[idx]); //FREEEEE CUANDO ACABEMOS DE USARLLO
 }
 
 void	cardinal_count(char *line, int idx, int *textures, t_wall_path *path)
@@ -68,7 +68,7 @@ void check_start_map(t_map *map, t_wall_path *path)
 	int 	idx;
 	int		flag;
 
-	int *textures = malloc(sizeof(int) * 6); //HACERLE FREEEEEE
+	int *textures = malloc(sizeof(int) * 6);
 	flag = 0;
     line = get_next_line(map->fd);
     while (line)
