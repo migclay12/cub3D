@@ -70,9 +70,34 @@ void	ft_get_player(t_map *map, int *y, int *x)
 		*x = 0;
 		while (map->matrix[*y][*x] != '\n')
 		{
-			if (map->matrix[*y][*x] == PLAYER_N || map->matrix[*y][*x] == PLAYER_E\
-                || map->matrix[*y][*x] == PLAYER_S || map->matrix[*y][*x] == PLAYER_W)
+			if (map->matrix[*y][*x] == PLAYER_N)
+			{
+				map->p_x = *x;
+				map->p_y = *y;
+				map->p_or = PLAYER_N;
 				return ;
+			}
+			if (map->matrix[*y][*x] == PLAYER_E)
+			{
+				map->p_x = *x;
+				map->p_y = *y;
+				map->p_or = PLAYER_E;
+				return ;
+			}
+			if (map->matrix[*y][*x] == PLAYER_S)
+			{
+				map->p_x = *x;
+				map->p_y = *y;
+				map->p_or = PLAYER_S;
+				return ;
+			}
+			if (map->matrix[*y][*x] == PLAYER_W)
+			{
+				map->p_x = *x;
+				map->p_y = *y;
+				map->p_or = PLAYER_W;
+				return ;
+			}
 			(*x)++;
 		}
 		(*y)++;

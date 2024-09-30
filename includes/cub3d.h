@@ -23,6 +23,7 @@
 
 void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path);
 void check_start_map(t_map *map, t_wall_path *path);
+void	start_the_game(t_mlx mlx);
 
 //Errors
 void	ft_print_error(char *str);
@@ -30,6 +31,7 @@ void	ft_char_error(t_map *map, char c, int i, int error);
 void	ft_char_error_wall(t_map *map, int y, int x, char c);
 
 //Utils
+void	ft_free_matrix(char **matrix);
 char	**ft_free_map(char **matrix, int i);
 char *remove_spaces(char *str);
 char	*ft_str(const char *s, int c);

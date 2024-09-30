@@ -14,6 +14,7 @@
 
 char	**ft_free_map(char **matrix, int i)
 {
+	printf("FT_FREE_MAP\n");
 	while (i >= 0)
 	{
 		free(matrix[i]);

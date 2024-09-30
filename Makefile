@@ -5,7 +5,7 @@ INC_DIR = includes
 SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 OBJS = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror #-g3  -fsanitize=address,leak
+FLAGS = -Wall -Wextra -Werror -o3 #-g3  -fsanitize=address,leak
 FLAGS += -I includes
 #FLAGS_MLX =  -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 FLAGS_MLX = -Iinclude -ldl -lglfw -pthread -lm
@@ -43,7 +43,7 @@ $(MLX)/libmlx.a:
 	@gcc $(FLAGS) $(FLAGS_MLX) -c $< -o $@ -I includes
 
 exe: all
-	@./$(NAME) maps/map0.cub
+	@./$(NAME) maps/map1.cub
 #	@./$(NAME) maps/good/test_whitespace.cub
 #	@./$(NAME) map1.cub
 #	@./$(NAME) maps/good/cheese_maze.cub

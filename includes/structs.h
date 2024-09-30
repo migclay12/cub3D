@@ -5,6 +5,7 @@ typedef struct s_player //the player structure
 {
 	int		plyr_x; 
 	int		plyr_y; 
+	char	playr_orient;
 }	t_player;
 
 typedef struct s_map
@@ -17,6 +18,9 @@ typedef struct s_map
 	char	**matrix;
 	char	*line_start_map;
 	int		start_line;
+	int		p_x; 
+	int		p_y; 
+	char	p_or;
 	t_player	player;
 }	t_map;
 

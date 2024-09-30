@@ -112,7 +112,7 @@ char	**ft_save_map(t_map *map)
 	if (!map->matrix)
 		return (0);
 	i = 0;
-	while (i < map->start_line)
+	while (i < map->start_line - 1)
 	{
 		temp = get_next_line(map->fd);
 		//printf("TEMP: %s", temp);
@@ -126,7 +126,6 @@ char	**ft_save_map(t_map *map)
 		temp = get_next_line(map->fd);
 		//printf("TEMP2: %s", temp);
 		map->matrix[i] = malloc(sizeof(char) * (ft_strlen(temp) + 1));
-		//map->matrix[i] = get_next_line(map->fd);
 		if (!map->matrix[i])
 		{
 			//printf("ERROR %d\n", i);	
@@ -157,6 +156,9 @@ void	ft_print_matrix(t_map *map)
 
 void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path)
 {
+	t_player player;
+
+	ft_memset(&player, 0, sizeof(t_player));
 	map->start = 0;
 
 	map->fd = open(map->name, O_RDONLY);
@@ -178,7 +180,10 @@ void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path)
 	map->matrix = ft_save_map(map);
 	mlx->map.matrix = ft_save_map(&mlx->map);
 	//ft_print_matrix(map);
-	//ft_print_matrix(&mlx->map);
+	ft_print_matrix(&mlx->map);
 	//printf("END\n");
-	ft_validate(&mlx->map);
+	ft_validate(map);
+	mlx->map.p_x = map->p_x;
+	mlx->map.p_y = map->p_y;
+	mlx->map.p_or = map->p_or;
 }

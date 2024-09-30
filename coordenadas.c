@@ -21,7 +21,6 @@ void check_coordenadas(int *textures, t_wall_path *path)
 	printf("numero C es %d\n", textures[C]);
 	printf("numero F es %d\n", textures[F]);
 
-	printf("NO entiendo las estructuras? \n");
 	printf("PATH de NO es %s", path->NO_path);
 	printf("PATH de SO es %s", path->SO_path);
 	printf("PATH de EA es %s", path->EA_path);	

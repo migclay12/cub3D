@@ -26,56 +26,6 @@ void	ft_free_matrix(char **matrix)
 	free(matrix);
 }
 
-// exit the game
-void	ft_exit(t_mlx *mlx)
-{
-	int	i = 0;
-	while (mlx->map.matrix[i])
-		free(mlx->map.matrix[i]);
-	mlx_delete_image(mlx->mlx_p, mlx->img);
-	mlx_close_window(mlx->mlx_p); 
-	mlx_terminate(mlx->mlx_p); 
-	printf("Game closed\n"); 
-	exit(0); 
-}
-
-// key press
-void mlx_key(mlx_key_data_t keydata, void *ml)	
-{
-	t_mlx	*mlx;
-
-	mlx = ml;
-	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)) // exit the game
-		ft_exit(mlx);
-}
-
-// game loop
-void	game_loop(void *ml)	
-{
-	t_mlx	*mlx;
-
-	mlx = ml;	
-	mlx_delete_image(mlx->mlx_p, mlx->img);
-	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
-	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0); 
-}
-
-// start the game
-void	start_the_game(t_mlx mlx)
-{
-	printf("AAAAAAAAAAAA\n");
-	mlx.mlx_p = mlx_init(S_W, S_H, "Cub3D", 0);	
-	printf("BBBBBBBBBBBB\n");
-	mlx_loop_hook(mlx.mlx_p, &game_loop, &mlx);
-	printf("CCCCCCCCCCCC\n");
-	mlx_key_hook(mlx.mlx_p, &mlx_key, &mlx);
-	printf("DDDDDDDDDDDD\n");
-	//Con flecha peta, understand why
-	mlx_loop(mlx.mlx_p);
-	printf("EEEEEEEEEEEE\n");
-}
-
-
 int main(int argc, char **argv)
 {
 	t_map		map;
@@ -95,6 +45,8 @@ int main(int argc, char **argv)
 	}
 	ft_all_map(&map, &mlx, &path);
 
+	printf("PLAYER_X: %d\nPLAYER_Y: %d\nPLAYER_ORIEN: %c\n", mlx.map.p_x, mlx.map.p_y, mlx.map.p_or);
+	//printf("PLAYER_X: %d\nPLAYER_Y: %d\nPLAYER_ORIEN: %c\n", map.p_x, map.p_y, map.p_or);
 	start_the_game(mlx);
 	
 	printf("BEFORE FREE\n");
@@ -103,3 +55,4 @@ int main(int argc, char **argv)
 	ft_free_matrix(mlx.map.matrix);
 	//printf("OFFICIAL END\n");
 }
+
