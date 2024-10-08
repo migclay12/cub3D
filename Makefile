@@ -5,19 +5,19 @@ INC_DIR = includes
 SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 OBJS = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -o3 #-g3  -fsanitize=address,leak
+#FLAGS = -Wall -Wextra -Werror -o3 #-g3  -fsanitize=address,leak
 FLAGS += -I includes
-#FLAGS_MLX =  -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-FLAGS_MLX = -Iinclude -ldl -lglfw -pthread -lm
+FLAGS_MLX =  -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+#FLAGS_MLX = -Iinclude -ldl -lglfw -pthread -lm
 
 
-#MLX_PATH	= minilibx-linux/
-#MLX_NAME	= libmlx.a
-#MLX			= $(MLX_PATH)$(MLX_NAME)
-
-MLX_PATH	= MLX42/build/
-MLX_NAME	= libmlx42.a
+MLX_PATH	= minilibx-linux/
+MLX_NAME	= libmlx.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
+
+#MLX_PATH	= MLX42/build/
+#MLX_NAME	= libmlx42.a
+#MLX			= $(MLX_PATH)$(MLX_NAME)
 
 LIB = libft
 

@@ -14,10 +14,10 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+//# include "../MLX42/include/MLX42/MLX42.h"
 # include "defines.h"
 # include "structs.h"
-//# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdio.h>
 
@@ -38,4 +38,12 @@ char	*ft_str(const char *s, int c);
 
 //Validate
 void	ft_validate(t_map *map);
+
+//Keys
+int	on_key_press(int key, t_mlx *mlx);
+int	ft_exit(t_mlx *mlx);
+//void mlx_key(mlx_key_data_t keydata, void *ml);
+
+char	*init_game(t_mlx mlx);
+
 #endif

@@ -47,8 +47,11 @@ int main(int argc, char **argv)
 
 	printf("PLAYER_X: %d\nPLAYER_Y: %d\nPLAYER_ORIEN: %c\n", mlx.map.p_x, mlx.map.p_y, mlx.map.p_or);
 	//printf("PLAYER_X: %d\nPLAYER_Y: %d\nPLAYER_ORIEN: %c\n", map.p_x, map.p_y, map.p_or);
-	start_the_game(mlx);
-	
+	//start_the_game(mlx);
+	//printf("SIZEEEE3: %d\n", mlx.map.size_y);
+
+	init_game(mlx);
+
 	printf("BEFORE FREE\n");
 	ft_free_matrix(map.matrix);
 	printf("BEFORE FREE2\n");

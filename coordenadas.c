@@ -98,12 +98,13 @@ int	cardinal_count(char *line, int idx, int *textures, t_wall_path *path, t_map 
 			textures[WE] != 1 || textures[C] != 1 || textures[F] != 1) && line[idx] == 49)
 		ft_print_error("un uno se ha perdido");
 	if ((textures[NO] == 1 || textures[SO] == 1 || textures[EA] == 1 || 
-	textures[WE] == 1 || textures[C]== 1 || textures[F]== 1) && line[idx] == 49 && flag == 0)
+	textures[WE] == 1 || textures[C]== 1 || textures[F]== 1) && line[idx] == 49 && map->flag == 0)
 	{
 		map->line_start_map = ft_strdup(line); //Free this at some point
-		flag = 1;
+		//printf("COORDINAL LINE: %s\n", map->line_start_map);
+		map->flag = 1;
 	} 
-	return (flag);
+	return (map->flag);
 }
 
 void check_start_map(t_map *map, t_wall_path *path)
@@ -112,7 +113,9 @@ void check_start_map(t_map *map, t_wall_path *path)
 	int 	idx;
 	int		flag;
 
-	int *textures = malloc(sizeof(int) * 6);
+	//int *textures = malloc(sizeof(int) * 6);
+	int *textures = calloc(6, sizeof(int));
+	map->flag = 0;
 	flag = 0;
     line = get_next_line(map->fd);
     while (line)
@@ -129,6 +132,7 @@ void check_start_map(t_map *map, t_wall_path *path)
 	if (textures[NO] != 1 || textures[SO] != 1 || textures[EA] != 1 || 
 		textures[WE] != 1 || textures[C] != 1 || textures[F] != 1)
 		ft_print_error("falta o sobra info\n");
-	check_coordenadas(textures, path);
+	//check_coordenadas(textures, path);
+	//printf("CHECK START: %s\n", map->line_start_map);
 	free (textures);
 }

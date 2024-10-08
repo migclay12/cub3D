@@ -1,12 +1,35 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_shape
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}	t_shape;
+
 typedef struct s_player //the player structure
 {
 	int		plyr_x; 
 	int		plyr_y; 
 	char	playr_orient;
+	int		l_r;
+	int		u_d;
+	double		angle;
+	int		rot;
 }	t_player;
+
+typedef struct s_mlx_img
+{
+	int		w;
+	int		h;
+	void	*ptr;
+	char	*addr;
+	int		bpp;
+	int		line;
+	int		end;
+}	t_img;
 
 typedef struct s_map
 {
@@ -21,6 +44,7 @@ typedef struct s_map
 	int		p_x; 
 	int		p_y; 
 	char	p_or;
+	int		flag; //temporal para las coordenadas
 	t_player	player;
 }	t_map;
 
@@ -37,8 +61,11 @@ typedef struct s_wall_path
 
 typedef struct s_mlx
 {
-	mlx_image_t		*img;	
-	mlx_t			*mlx_p;	
+	void		*ptr;
+	void		*win;
+	//mlx_image_t		*img;	
+	//mlx_t			*mlx_p;
+	t_img			img;
 	t_player		player;
 	t_map			map;
 }	t_mlx;

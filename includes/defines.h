@@ -12,25 +12,26 @@
 # define WALL		'1'
 
 //Key hooks
-# define ESC	53
-# define W		13
-# define A		0
-# define S		1
-# define D		2
+# define KEY_ESC	65307
+# define KEY_LEFT	65361
+# define KEY_RIGHT	65363
+# define KEY_W		119
+# define KEY_A		97
+# define KEY_S		115
+# define KEY_D		100
 
-# define UP			126
-# define LEFT		123
-# define DOWN		125
-# define RIGHT		124
-# define DESTROY 	17
-
-# define S_W	1280
-# define S_H	720
+# define S_W	1700
+# define S_H	920
 
 //Error states
 # define EMPTY_LINE		-1
 # define EXTRA_START	-2
 # define START_MISSING	-3
 # define WRONG_CHAR		-4
+
+//TESTS
+#define BLOCK_SIZE 64
+#define PLAYER_SPEED 1
+#define ROTATION_SPEED 0.045
 
 #endif
