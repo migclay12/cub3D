@@ -13,13 +13,18 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <math.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdbool.h>
 # include "../libft/libft.h"
 //# include "../MLX42/include/MLX42/MLX42.h"
 # include "defines.h"
 # include "structs.h"
 # include "../minilibx-linux/mlx.h"
-# include <math.h>
-# include <stdio.h>
+
+//# include <errno.h>
+
 
 void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path);
 void check_start_map(t_map *map, t_wall_path *path);
@@ -41,7 +46,10 @@ void	ft_validate(t_map *map);
 
 //Keys
 int	on_key_press(int key, t_mlx *mlx);
+int	on_key_release(int key, t_mlx *mlx);
 int	ft_exit(t_mlx *mlx);
+void	update_player(t_mlx *mlx);
+void update_player_position(t_mlx *mlx);
 //void mlx_key(mlx_key_data_t keydata, void *ml);
 
 char	*init_game(t_mlx mlx);

@@ -43,7 +43,7 @@ $(MLX)/libmlx.a:
 	@gcc $(FLAGS) $(FLAGS_MLX) -c $< -o $@ -I includes
 
 exe: all
-	@./$(NAME) maps/map1.cub
+	@./$(NAME) maps/map0.cub
 #	@./$(NAME) maps/good/test_whitespace.cub
 #	@./$(NAME) map1.cub
 #	@./$(NAME) maps/good/cheese_maze.cub

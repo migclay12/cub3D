@@ -18,122 +18,132 @@ int	ft_exit(t_mlx *mlx)
 	exit(0);
 }
 
-/* void	ft_reles(int keydata, t_mlx *mlx)	// release the key
+/* void	player_move(t_mlx *mlx, double speed, double angle)
 {
-	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))
-		mlx->player.l_r = 0;
-	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_RELEASE))
-		mlx->player.l_r = 0;
-	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_RELEASE))
-		mlx->player.u_d = 0;
-	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_RELEASE))
-		mlx->player.u_d = 0;
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		mlx->player.rot = 0;
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		mlx->player.rot = 0;
+	//double const	diag_speed = SPEED_MOV / sqrt(2.5);
+	double			dx;
+	double			dy;
+
+	angle += mlx->player.angle;
+	// if (moving_diagonal(mlx))
+	// 	speed = diag_speed;
+	dx = speed * cos(angle);
+	dy = speed * sin(angle);
+	// if (can_move(mlx, dx, 0))
+	// 	mlx->player.pos.x += dx;
+	// if (can_move(mlx, 0, dy))
+	// 	mlx->player.pos.y += dy;
+	return ;
 }
 
-// key press
-void mlx_key(int keydata, void *ml)
+void	update_player(t_mlx *mlx)
 {
-	t_mlx	*mlx;
-
-	mlx = ml;
-	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)) // exit the game
-		ft_exit(mlx);
-	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS)) // move left
-		mlx->player.l_r = -1;
-	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS)) // move right
-		mlx->player.l_r = 1;
-	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS)) // move down
-		mlx->player.u_d = -1;
-	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_PRESS)) // move up
-		mlx->player.u_d = 1;
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS) // rotate left
-		mlx->player.rot = -1;
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS) // rotate right
-		mlx->player.rot = 1;
-	//printf("KEY: %d\n", keydata.key);
-	ft_reles(keydata, mlx);
-}
-
-void	move_player(t_mlx *mlx, double move_x, double move_y)	// move the player
-{
-	//int		map_grid_y;
-	//int		map_grid_x; 
-	int		new_x;
-	int		new_y;
-
-	new_x = roundf(mlx->player.plyr_x + move_x); // get the new x position
-	new_y = roundf(mlx->player.plyr_y + move_y); // get the new y position
- 	//map_grid_x = (new_x / BLOCK_SIZE); // get the x position in the map
-	//map_grid_y = (new_y / BLOCK_SIZE); // get the y position in the map
-		mlx->player.plyr_x = new_x; // move the player
-		mlx->player.plyr_y = new_y; // move the player
-}
-
-void	rotate_player(t_mlx *mlx, int i)	// rotate the player
-{
-	if (i == 1)
+	//if (mlx->player.rotate_l)
+	//	player_rotate(mlx, -SPEED_ROT);
+	//if (mlx->player.rotate_r)
+	//	player_rotate(mlx, SPEED_ROT);
+	if (mlx->player.move_no)
 	{
-		mlx->player.angle += ROTATION_SPEED; // rotate right
-		if (mlx->player.angle > 2 * M_PI)
-			mlx->player.angle -= 2 * M_PI;
+		printf("Update NO\n");
+		player_move(mlx, PLAYER_SPEED, 0.0);
 	}
-	else
+	if (mlx->player.move_so)
 	{
-		mlx->player.angle -= ROTATION_SPEED; // rotate left
-		if (mlx->player.angle < 0)
-			mlx->player.angle += 2 * M_PI;
+		printf("Update SO\n");
+		player_move(mlx, PLAYER_SPEED, M_PI);
 	}
-}
-
-void	hook(t_mlx *mlx, double move_x, double move_y)	// hook the player
-{
-	if (mlx->player.rot == 1) //rotate right
-		rotate_player(mlx, 1);
-	if (mlx->player.rot == -1) //rotate left
-		rotate_player(mlx, 0);
-	if (mlx->player.l_r == 1) //move right
+	if (mlx->player.move_we)
 	{
-		move_x = -cos(mlx->player.angle) * PLAYER_SPEED;
-		move_y = -sin(mlx->player.angle) * PLAYER_SPEED;		
+		printf("Update WE\n");
+		player_move(mlx, PLAYER_SPEED, -M_PI_2);
 	}
-	if (mlx->player.l_r == -1) //move left
+	if (mlx->player.move_ea)
 	{
-		move_x = cos(mlx->player.angle) * PLAYER_SPEED;
-		move_y = sin(mlx->player.angle) * PLAYER_SPEED;
+		printf("Update EA\n");
+		player_move(mlx, PLAYER_SPEED, M_PI_2);
 	}
-	if (mlx->player.u_d == 1) //move up
-	{
-		move_x = -sin(mlx->player.angle) * PLAYER_SPEED;
-		move_y = cos(mlx->player.angle) * PLAYER_SPEED;
-	}
-	if (mlx->player.u_d == -1) //move down
-	{
-		move_x = sin(mlx->player.angle) * PLAYER_SPEED;
-		move_y = -cos(mlx->player.angle) * PLAYER_SPEED;
-	}
-	move_player(mlx, move_x, move_y); // move the player
+	return ;
 } */
 
-int	on_key_press(int key, t_mlx *mlx)
+//DOESNT FUCKING WORK
+// Function to check for wall collision based on the player's next position
+int is_wall(t_mlx *mlx, float x, float y)
 {
-	printf("KEYYYY: %d\n", key);
-	if (key == KEY_ESC)
+	int map_x = (int)(x / BLOCK_SIZE);
+	int map_y = (int)(y / BLOCK_SIZE);
+
+	//printf("Checking Wall: World Position (%f, %f) -> Map Position (%d, %d)\n", x, y, map_x, map_y);
+
+	if (map_x < 0 || map_x >= mlx->map.size_x || map_y < 0 || map_y >= mlx->map.size_y)
+		return 1; // Out of bounds - treat as a wall
+
+	if (mlx->map.matrix[map_y][map_x] == '1')
+		return 1;
+
+	return 0;
+}
+
+
+void update_player_position(t_mlx *mlx)
+{
+	float move_speed = 0.01; // Speed of movement can be adjusted
+	float next_x = mlx->player.plyr_x;
+	float next_y = mlx->player.plyr_y;
+
+	if (mlx->player.move_no)
+		mlx->player.plyr_y -= move_speed;
+	if (mlx->player.move_so)
+		mlx->player.plyr_y += move_speed;
+	if (mlx->player.move_we)
+		mlx->player.plyr_x -= move_speed;
+	if (mlx->player.move_ea)
+		mlx->player.plyr_x += move_speed;
+
+/* 	if (mlx->player.move_no)
+		next_y -= move_speed;
+	if (mlx->player.move_so)
+		next_y += move_speed;
+	if (mlx->player.move_we)
+		next_x -= move_speed;
+	if (mlx->player.move_ea)
+		next_x += move_speed;
+
+	printf("Current Position: (%f, %f)\n", mlx->player.plyr_x, mlx->player.plyr_y);
+	printf("Next Position: (%f, %f)\n", next_x, next_y);
+	printf("Wall Collision X: %d\n", is_wall(mlx, next_x, mlx->player.plyr_y));
+	printf("Wall Collision Y: %d\n", is_wall(mlx, mlx->player.plyr_x, next_y)); */
+
+	if (!is_wall(mlx, next_x, mlx->player.plyr_y))  // Check X movement
+		mlx->player.plyr_x = next_x;
+	if (!is_wall(mlx, mlx->player.plyr_x, next_y))  // Check Y movement
+		mlx->player.plyr_y = next_y;
+}
+
+
+int on_key_press(int keycode, t_mlx *mlx)
+{
+	if (keycode == KEY_ESC)
 		ft_exit(mlx);
-/* 	else if (key == KEY_LEFT)
-		game->p.rotate_l = true;
-	else if (key == KEY_RIGHT)
-		game->p.rotate_r = true;
-	else if (key == KEY_W)
-		game->p.move_no = true;
-	else if (key == KEY_S)
-		game->p.move_so = true;
-	else if (key == KEY_A)
-		game->p.move_we = true;
-	else if (key == KEY_D)
-		game->p.move_ea = true; */
+	if (keycode == KEY_W)
+		mlx->player.move_no = 1;
+	if (keycode == KEY_S)
+		mlx->player.move_so = 1;
+	if (keycode == KEY_A)
+		mlx->player.move_we = 1;
+	if (keycode == KEY_D)
+		mlx->player.move_ea = 1;
+	return (0);
+}
+
+int on_key_release(int keycode, t_mlx *mlx)
+{
+	if (keycode == KEY_W)
+		mlx->player.move_no = 0;
+	if (keycode == KEY_S)
+		mlx->player.move_so = 0;
+	if (keycode == KEY_A)
+		mlx->player.move_we = 0;
+	if (keycode == KEY_D)
+		mlx->player.move_ea = 0;
 	return (0);
 }

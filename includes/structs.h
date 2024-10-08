@@ -11,13 +11,17 @@ typedef struct s_shape
 
 typedef struct s_player //the player structure
 {
-	int		plyr_x; 
-	int		plyr_y; 
-	char	playr_orient;
-	int		l_r;
-	int		u_d;
+	double		plyr_x;
+	double		plyr_y;
+	char		orient;
+	int			l_r;
+	int			u_d;
 	double		angle;
-	int		rot;
+	int			rot;
+	int		move_no;
+	int		move_so;
+	int		move_we;
+	int		move_ea;
 }	t_player;
 
 typedef struct s_mlx_img
