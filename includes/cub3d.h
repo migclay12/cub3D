@@ -17,14 +17,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <stdint.h> // For uint32_t
 # include "../libft/libft.h"
-//# include "../MLX42/include/MLX42/MLX42.h"
 # include "defines.h"
 # include "structs.h"
 # include "../minilibx-linux/mlx.h"
 
 //# include <errno.h>
-
 
 void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path);
 void check_start_map(t_map *map, t_wall_path *path);
@@ -53,5 +52,9 @@ void update_player_position(t_mlx *mlx);
 //void mlx_key(mlx_key_data_t keydata, void *ml);
 
 char	*init_game(t_mlx mlx);
+void	draw_minimap(t_mlx *mlx);
+void    line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
+void    put_px(int x, int y, int color, t_img *img);
+void    draw_arrow(t_mlx *mlx, t_shape s);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ablanco- <ablanco-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:27:35 by miggonza          #+#    #+#             */
-/*   Updated: 2024/09/29 14:04:17 by ablanco-         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:34:19 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ void	ft_free_matrix(char **matrix)
 	free(matrix);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_map		map;
 	t_mlx		mlx;
-	t_wall_path path;
+	t_wall_path	path;
 
-    ft_memset(&map, 0, sizeof(t_map));
+	ft_memset(&map, 0, sizeof(t_map));
 	ft_memset(&mlx, 0, sizeof(t_mlx));
 	ft_memset(&path, 0, sizeof(t_wall_path));
-	
 	if (argc != 2)
 		ft_print_error("A map name has not been provided");
 	if (argc == 2)
@@ -44,18 +43,10 @@ int main(int argc, char **argv)
 		mlx.map.name = argv[1];
 	}
 	ft_all_map(&map, &mlx, &path);
-
-	printf("PLAYER_X: %d\nPLAYER_Y: %d\nPLAYER_ORIEN: %c\n", mlx.map.p_x, mlx.map.p_y, mlx.map.p_or);
-	//printf("PLAYER_X: %d\nPLAYER_Y: %d\nPLAYER_ORIEN: %c\n", map.p_x, map.p_y, map.p_or);
-	//start_the_game(mlx);
-	//printf("SIZEEEE3: %d\n", mlx.map.size_y);
-
 	init_game(mlx);
-
 	printf("BEFORE FREE\n");
 	ft_free_matrix(map.matrix);
 	printf("BEFORE FREE2\n");
 	ft_free_matrix(mlx.map.matrix);
-	//printf("OFFICIAL END\n");
+	printf("OFFICIAL END\n");
 }
-

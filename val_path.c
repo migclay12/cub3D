@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:34:51 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/08 13:37:32 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:21:58 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,34 +70,8 @@ void	ft_get_player(t_map *map, int *y, int *x)
 		*x = 0;
 		while (map->matrix[*y][*x] != '\n')
 		{
-			if (map->matrix[*y][*x] == PLAYER_N)
-			{
-				map->p_x = *x;
-				map->p_y = *y;
-				map->p_or = PLAYER_N;
+			if (ft_str(P_STARTS, map->matrix[*y][*x]))
 				return ;
-			}
-			if (map->matrix[*y][*x] == PLAYER_E)
-			{
-				map->p_x = *x;
-				map->p_y = *y;
-				map->p_or = PLAYER_E;
-				return ;
-			}
-			if (map->matrix[*y][*x] == PLAYER_S)
-			{
-				map->p_x = *x;
-				map->p_y = *y;
-				map->p_or = PLAYER_S;
-				return ;
-			}
-			if (map->matrix[*y][*x] == PLAYER_W)
-			{
-				map->p_x = *x;
-				map->p_y = *y;
-				map->p_or = PLAYER_W;
-				return ;
-			}
 			(*x)++;
 		}
 		(*y)++;

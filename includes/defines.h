@@ -2,6 +2,7 @@
 # define DEFINES_H
 
 # define VAL_CHAR	" 01NESW"
+# define P_STARTS   "NESW"
 # define OPEN_WALL	" 1X\n"
 # define MAP_mlx	"01P"
 # define PLAYER_N	'N'
@@ -31,7 +32,7 @@
 
 //TESTS
 #define BLOCK_SIZE 64
-#define PLAYER_SPEED 1
-#define ROTATION_SPEED 0.045
+#define MOVE_SPEED 0.01
+#define ROTATION_SPEED 0.02
 
 #endif

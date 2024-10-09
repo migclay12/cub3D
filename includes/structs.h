@@ -14,14 +14,13 @@ typedef struct s_player //the player structure
 	double		plyr_x;
 	double		plyr_y;
 	char		orient;
-	int			l_r;
-	int			u_d;
 	double		angle;
-	int			rot;
 	int		move_no;
 	int		move_so;
 	int		move_we;
 	int		move_ea;
+	int		rot_l;
+	int		rot_r;
 }	t_player;
 
 typedef struct s_mlx_img
@@ -45,9 +44,9 @@ typedef struct s_map
 	char	**matrix;
 	char	*line_start_map;
 	int		start_line;
-	int		p_x; 
-	int		p_y; 
-	char	p_or;
+	// int		p_x; 
+	// int		p_y; 
+	// char	p_or;
 	int		flag; //temporal para las coordenadas
 	t_player	player;
 }	t_map;
@@ -67,11 +66,9 @@ typedef struct s_mlx
 {
 	void		*ptr;
 	void		*win;
-	//mlx_image_t		*img;	
-	//mlx_t			*mlx_p;
-	t_img			img;
-	t_player		player;
-	t_map			map;
+	t_img		img;
+	t_player	player;
+	t_map		map;
 }	t_mlx;
 
 typedef enum s_wall

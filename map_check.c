@@ -22,15 +22,15 @@ void	ft_mlx_lines(t_map *map, char *line)
 	{
 		//printf("%c - ", line[i]);
 		if (!ft_str(VAL_CHAR, line[i]))
-				ft_char_error(map, line[i], i, WRONG_CHAR);
-		if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S'\
-			|| line[i] == 'W')
+			ft_char_error(map, line[i], i, WRONG_CHAR);
+		if (ft_str(P_STARTS, line[i]))
 			map->start++;
 		if (map->start > 1)
 			ft_char_error(map, line[i], i, EXTRA_START);
 		i++;
 	}
 }
+
 //The flag is to mlx if there is an empty line in the middle of the file
 //Si le metes un enter debajo del mapa cuenta bien las lineas
 //do I need temp?
@@ -53,7 +53,8 @@ void	ft_map_size(t_map *map)
 	{
 		line = get_next_line(map->fd);
 		//printf("LINEEEE: %s", line);
-		if (flag2 == 0 && ft_strncmp(line, map->line_start_map, ft_strlen(line)) == 0)
+		if (flag2 == 0 && ft_strncmp(line, map->line_start_map,
+				ft_strlen(line)) == 0)
 		{
 			//printf("WTF?!\n");
 			flag2 = 1;
@@ -94,7 +95,7 @@ int	ft_map_name(char *map)
 	return (0);
 }
 
-void ft_open_file(t_map *map)
+void	ft_open_file(t_map *map)
 {
 	printf("MAP: %s\n", map->name);
 	map->fd = open(map->name, O_RDONLY);
@@ -106,8 +107,8 @@ void ft_open_file(t_map *map)
 
 char	**ft_save_map(t_map *map)
 {
-	int	i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	//printf("START: %d\n", map->start_line);
 	map->matrix = malloc(sizeof(char **) * (map->size_y + 1));
@@ -144,8 +145,8 @@ char	**ft_save_map(t_map *map)
 
 void	ft_print_matrix(t_map *map)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	//printf("IMN GOING INSANE\n");
 	while (i < map->size_y)
@@ -159,21 +160,15 @@ void	ft_print_matrix(t_map *map)
 //GURADAR MAPA, validarlo, limpiarlo y vlverlo a guardar?
 //asi no tienes que tener un map a parte del mlx
 //could work, quita muchas lineas
+//y organizar los fd wtf XD
 void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path)
 {
-	//t_player player;
-	//ft_memset(&player, 0, sizeof(t_player));
-	
 	map->start = 0;
-
 	map->fd = open(map->name, O_RDONLY);
 	check_start_map(map, path);
 	close (map->fd);
 	mlx->map.line_start_map = ft_strdup(map->line_start_map); //Free at some point
 	mlx->map.start_line = map->start_line;
-	
-	//printf("ALL MAP LINE: %s\n", map->line_start_map);
-
 	ft_open_file(map);
 	ft_open_file(&mlx->map);
 	ft_map_size(map);
@@ -190,9 +185,6 @@ void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path)
 	ft_print_matrix(&mlx->map);
 	//printf("END\n");
 	ft_validate(map);
-	mlx->map.p_x = map->p_x;
-	mlx->map.p_y = map->p_y;
-	mlx->map.p_or = map->p_or;
 	free(mlx->map.line_start_map);
 	free(map->line_start_map);
 }
