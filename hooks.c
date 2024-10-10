@@ -66,6 +66,10 @@ void	player_move(t_mlx *mlx, double speed, double angle)
 	angle += mlx->player.angle;
 	dx = speed * cos(angle);
 	dy = speed * sin(angle);
+	//printf("Current Position: (%f, %f)\n", mlx->player.plyr_x, mlx->player.plyr_y);
+	//printf("Next Position: (%f, %f)\n", dx, dy);
+	//printf("Wall Collision X: %d\n", is_wall(mlx, dx, mlx->player.plyr_y));
+	//printf("Wall Collision Y: %d\n", is_wall(mlx, mlx->player.plyr_x, dy));
 	//Only works if angles are not being used wtf?!
 	/* if (!is_wall(mlx, dx, dy))
 	{

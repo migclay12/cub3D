@@ -68,3 +68,80 @@ void draw_arrow(t_mlx *mlx, t_shape s)
 	line(mlx, end_x, end_y, arrow_x1, arrow_y1, 0x1630BE);
 	line(mlx, end_x, end_y, arrow_x2, arrow_y2, 0x1630BE);
 }
+
+int	is_wall_ray(t_mlx *mlx, double x, double y)
+{
+	//printf("IS_RAY START\n");
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)(x / BLOCK_SIZE); // / BLOCK_SIZE
+	map_y = (int)(y / BLOCK_SIZE); // / BLOCK_SIZE
+	//printf("IS_RAY BUCLE\n");
+	if (map_x < mlx->map.size_x || map_x > 0 || map_y > 0 \
+		|| map_y < mlx->map.size_y)
+		{
+			//printf("IS_RAY %c\n", mlx->map.matrix[map_y][map_x]);
+			if (mlx->map.matrix[map_y][map_x] == '1')
+				return (1);
+			else if (mlx->map.matrix[map_y][map_x] == '0')
+				return (0);
+		}
+	//printf("IS_RAY RETURN\n");
+	return (1);
+}
+
+float	ft_absolute(float num)
+{
+	if (num < 0)
+		return (num *= -1);
+	return (num);
+}
+
+void draw_ray(t_mlx *mlx, t_shape s)
+{
+	//printf("RAYYYYYYY: %d\n", is_wall_ray(mlx, 6, 6));
+	float ray_step = 0.5;
+	float angle = mlx->player.angle - M_PI_2;
+	float dir_x = cos(angle);
+	float dir_y = sin(angle);
+
+	float ray_x = mlx->player.plyr_x;
+	float ray_y = mlx->player.plyr_y;
+
+	float lenght = sqrt(pow(dir_x, 2) + pow(dir_y, 2));
+	//dir_x /= lenght;
+	//dir_y /= lenght;
+	
+	int center_x = s.y + 16;
+	int center_y = s.x + 16;
+
+	float prev_x = ray_x;
+	float prev_y = ray_y;
+
+
+	//printf("WALLLLLLLL0\n");
+	while (is_wall_ray(mlx, ray_x, ray_y) == 0)
+	{
+		prev_x = ray_x;
+		prev_y = ray_y;
+
+		ray_x += dir_x * ray_step;
+		ray_y += dir_y * ray_step;
+
+		//mlx_pixel_put(mlx->ptr, mlx->win, (int)ray_x, (int)ray_y, 0xff2955);
+		//printf("WALLLLLLLL1\n");
+		//printf("WALLLLLLLL2\n");
+		int end_x = (int)ray_x;
+		int end_y = (int)ray_y;
+		//int end_x = (int)(center_x + dir_x * (ray_x));
+		//int end_y = (int)(center_y + dir_y * (ray_y));
+		line(mlx, (int)prev_x, (int)prev_y, end_x, end_y, 0xff2955);
+		
+		//printf("Ray possition: (%f, %f)\n", ray_x, ray_y);
+	}
+	//printf("WALLLLLLLL3\n");
+	printf("Checking Wall: World Position (%f, %f)\n", ray_x, ray_y);
+
+	//float length = sqrt(pow(map_x - mlx->player.plyr_x, 2) + pow(map_y - mlx->player.plyr_y, 2));
+}

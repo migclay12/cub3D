@@ -88,11 +88,9 @@ int	cardinal_count(char *line, int idx, int *textures, t_wall_path *path, t_map 
 {
 	int flag_color;
 	int flag_texture;
-	int flag;
 
 	flag_texture = cardinal_save(textures, path, idx, line);
 	flag_color = color_save(textures, path, idx, line);
-	flag = 0;
 	if ((line[idx] > 32 && line[idx] <= 126 && line[idx] != 49) && (!flag_color && !flag_texture))
 		ft_print_error("Caracter no valido identificado");
 	if ((textures[NO] != 1 || textures[SO] != 1 || textures[EA] != 1 || 

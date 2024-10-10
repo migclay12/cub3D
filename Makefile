@@ -5,7 +5,7 @@ INC_DIR = includes
 SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 OBJS = $(SRCS:.c=.o)
 
-#FLAGS = -Wall -Wextra -Werror -o3 #-g3  -fsanitize=address,leak
+FLAGS = -Wall -Wextra #-Werror -o3 #-g3  -fsanitize=address,leak
 FLAGS += -I includes
 FLAGS_MLX =  -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 #FLAGS_MLX = -Iinclude -ldl -lglfw -pthread -lm

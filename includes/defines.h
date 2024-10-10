@@ -32,7 +32,7 @@
 
 //TESTS
 #define BLOCK_SIZE 64
-#define MOVE_SPEED 0.01
+#define MOVE_SPEED 1.5
 #define ROTATION_SPEED 0.02
 
 #endif

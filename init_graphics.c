@@ -46,7 +46,6 @@ char	*init_graphics(t_mlx *mlx)
 	mlx->img.addr = mlx_get_data_addr(mlx->img.ptr, &mlx->img.bpp,
 			&mlx->img.line, &mlx->img.end);
 	//printf("INIT_GRAPHICS4\n");
-	//mlx_loop_hook(mlx->ptr, on_loop, mlx);
 	hook_events(mlx);
 	//printf("INIT_GRAPHICS5\n");
 	mlx_loop(mlx->ptr);
@@ -72,8 +71,10 @@ void	init_the_player(t_mlx *mlx)
 		}
 		y++;
 	}
-	mlx->player.plyr_x = (double)x - 1 + 0.5;
-	mlx->player.plyr_y = (double)y - 1 + 0.5;
+	mlx->player.plyr_x = (double)(x - 1) * BLOCK_SIZE + BLOCK_SIZE / 4;
+	mlx->player.plyr_y = (double)(y - 1) * BLOCK_SIZE + BLOCK_SIZE / 4;
+	//mlx->player.plyr_x = (double)x - 1 + 0.5;
+	//mlx->player.plyr_y = (double)y - 1 + 0.5;
 	if (mlx->map.matrix[y - 1][x - 1] == PLAYER_N)
 		mlx->player.angle = 0.0;
 	else if (mlx->map.matrix[y - 1][x - 1] == PLAYER_E)
