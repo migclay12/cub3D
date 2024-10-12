@@ -32,12 +32,12 @@ int	is_wall(t_mlx *mlx, double x, double y)
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)(x);
-	map_y = (int)(y);
-	printf("Checking Wall: World Position (%f, %f) -> Map Position (%d, %d)\n",
-		x, y, map_x, map_y);
-	if (map_x < 0 || map_x >= mlx->map.size_x || map_y < 0 \
-		|| map_y >= mlx->map.size_y)
+	map_x = (int)(x / BLOCK_SIZE);
+	map_y = (int)(y / BLOCK_SIZE);
+	//printf("Checking Wall: World Position (%f, %f) -> Map Position (%d, %d)\n",
+		//x, y, map_x, map_y);
+	if (map_x < 0 || map_x > mlx->map.size_x || map_y < 0 \
+		|| map_y > mlx->map.size_y)
 		return (1);
 	if (mlx->map.matrix[map_y][map_x] == '1')
 		return (1);
@@ -58,27 +58,29 @@ void	player_rotate(t_mlx *mlx, double angle)
 	return ;
 }
 
-void	player_move(t_mlx *mlx, double speed, double angle)
+void player_move(t_mlx *mlx, double speed, double angle)
 {
-	double			dx;
-	double			dy;
+    double dx;
+    double dy;
 
-	angle += mlx->player.angle;
-	dx = speed * cos(angle);
-	dy = speed * sin(angle);
+    // Calculate the direction of movement based on player angle
+    angle += mlx->player.angle;
+    dx = speed * cos(angle);
+    dy = speed * sin(angle);
+
 	//printf("Current Position: (%f, %f)\n", mlx->player.plyr_x, mlx->player.plyr_y);
 	//printf("Next Position: (%f, %f)\n", dx, dy);
 	//printf("Wall Collision X: %d\n", is_wall(mlx, dx, mlx->player.plyr_y));
 	//printf("Wall Collision Y: %d\n", is_wall(mlx, mlx->player.plyr_x, dy));
-	//Only works if angles are not being used wtf?!
-	/* if (!is_wall(mlx, dx, dy))
-	{
-		mlx->player.plyr_x = dx;
-		mlx->player.plyr_y = dy;
-	} */
-	mlx->player.plyr_x += dx;
-	mlx->player.plyr_y += dy;
-	return ;
+
+    // Check if the new position (current position + movement) hits a wall
+    if (!is_wall(mlx, mlx->player.plyr_x + dx, mlx->player.plyr_y + dy))
+    {
+        // If there's no collision, update the player's position
+        mlx->player.plyr_x += dx;
+        mlx->player.plyr_y += dy;
+    }
+    return;
 }
 
 void	update_player(t_mlx *mlx)

@@ -100,8 +100,8 @@ float	ft_absolute(float num)
 
 void draw_ray(t_mlx *mlx, t_shape s)
 {
-	//printf("RAYYYYYYY: %d\n", is_wall_ray(mlx, 6, 6));
 	float ray_step = 0.5;
+	//Check te original position so you don't have to subtract this wtf
 	float angle = mlx->player.angle - M_PI_2;
 	float dir_x = cos(angle);
 	float dir_y = sin(angle);
@@ -109,16 +109,8 @@ void draw_ray(t_mlx *mlx, t_shape s)
 	float ray_x = mlx->player.plyr_x;
 	float ray_y = mlx->player.plyr_y;
 
-	float lenght = sqrt(pow(dir_x, 2) + pow(dir_y, 2));
-	//dir_x /= lenght;
-	//dir_y /= lenght;
-	
-	int center_x = s.y + 16;
-	int center_y = s.x + 16;
-
 	float prev_x = ray_x;
 	float prev_y = ray_y;
-
 
 	//printf("WALLLLLLLL0\n");
 	while (is_wall_ray(mlx, ray_x, ray_y) == 0)
@@ -129,19 +121,16 @@ void draw_ray(t_mlx *mlx, t_shape s)
 		ray_x += dir_x * ray_step;
 		ray_y += dir_y * ray_step;
 
-		//mlx_pixel_put(mlx->ptr, mlx->win, (int)ray_x, (int)ray_y, 0xff2955);
 		//printf("WALLLLLLLL1\n");
 		//printf("WALLLLLLLL2\n");
 		int end_x = (int)ray_x;
 		int end_y = (int)ray_y;
-		//int end_x = (int)(center_x + dir_x * (ray_x));
-		//int end_y = (int)(center_y + dir_y * (ray_y));
 		line(mlx, (int)prev_x, (int)prev_y, end_x, end_y, 0xff2955);
 		
 		//printf("Ray possition: (%f, %f)\n", ray_x, ray_y);
 	}
 	//printf("WALLLLLLLL3\n");
-	printf("Checking Wall: World Position (%f, %f)\n", ray_x, ray_y);
+	//printf("Checking Wall: World Position (%f, %f)\n", ray_x, ray_y);
 
 	//float length = sqrt(pow(map_x - mlx->player.plyr_x, 2) + pow(map_y - mlx->player.plyr_y, 2));
 }

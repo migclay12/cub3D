@@ -108,8 +108,8 @@ void	draw_player_minimap(t_mlx *mlx, t_shape s, int sx, int sy)
 {
 	s.width = 32;
 	s.height = 32;
-	s.x = (int)(mlx->player.plyr_y); //* BLOCK_SIZE + sx - s.width / 2);
-	s.y = (int)(mlx->player.plyr_x); //* BLOCK_SIZE + sy - s.height / 2);
+	s.x = (int)(mlx->player.plyr_y + sx - s.width / 2); //* BLOCK_SIZE + sx - s.width / 2);
+	s.y = (int)(mlx->player.plyr_x + sy - s.height / 2); //* BLOCK_SIZE + sy - s.height / 2);
 	circle(mlx, s, 0x1630BE);
 	draw_arrow(mlx, s);
 	//printf("PLAYER0\n");

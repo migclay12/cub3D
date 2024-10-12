@@ -71,8 +71,8 @@ void	init_the_player(t_mlx *mlx)
 		}
 		y++;
 	}
-	mlx->player.plyr_x = (double)(x - 1) * BLOCK_SIZE + BLOCK_SIZE / 4;
-	mlx->player.plyr_y = (double)(y - 1) * BLOCK_SIZE + BLOCK_SIZE / 4;
+	mlx->player.plyr_x = (double)(x - 1) * BLOCK_SIZE + BLOCK_SIZE / 2;
+	mlx->player.plyr_y = (double)(y - 1) * BLOCK_SIZE + BLOCK_SIZE / 2;
 	//mlx->player.plyr_x = (double)x - 1 + 0.5;
 	//mlx->player.plyr_y = (double)y - 1 + 0.5;
 	if (mlx->map.matrix[y - 1][x - 1] == PLAYER_N)
