@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_graphics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ablanco- <ablanco-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/09 17:52:52 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/13 17:50:54 by ablanco-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	on_loop(t_mlx	*mlx)
 {
 	update_player(mlx);
-	mlx_clear_window(mlx->ptr, mlx->win);
+	//mlx_clear_window(mlx->ptr, mlx->win); //Epileptic function
 	//printf("ON_LOOP1\n");
 	draw_minimap(mlx);
 	//printf("ON_LOOP2\n");
