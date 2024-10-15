@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ablanco- <ablanco-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:58:31 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/13 16:29:04 by ablanco-         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:19:33 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,15 @@ void	circle(t_mlx *mlx, t_shape s, int color)
 
 void	draw_player_minimap(t_mlx *mlx, t_shape s, int sx, int sy)
 {
-	s.width = 32;
-	s.height = 32;
+	s.width = BLOCK_SIZE / 2;
+	s.height = BLOCK_SIZE / 2;
 	s.x = (int)(mlx->player.plyr_y + sx - s.width / 2); //* BLOCK_SIZE + sx - s.width / 2);
 	s.y = (int)(mlx->player.plyr_x + sy - s.height / 2); //* BLOCK_SIZE + sy - s.height / 2);
 	circle(mlx, s, 0x1630BE);
-	draw_arrow(mlx, s);
+	//draw_arrow(mlx, s);
 	//printf("PLAYER0\n");
-	draw_ray(mlx, s);
+	//draw_ray(mlx);
+	draw_walls(mlx);
 	//printf("PLAYER1\n");
 }
 

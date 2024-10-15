@@ -1,6 +1,16 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef enum s_wall
+{
+	NO,
+	SO,
+	EA,
+	WE,
+	C,
+	F
+} t_wall;
+
 typedef struct s_shape
 {
 	int	x;
@@ -62,6 +72,16 @@ typedef struct s_wall_path
 
 } t_wall_path;
 
+typedef struct s_ray
+{
+	double		x;
+	double		y;
+	//double		long_ray;
+	double		wall_dist;
+	int			wall_height;
+	t_wall		wall_dir;
+}	t_ray;
+
 typedef struct s_mlx
 {
 	void		*ptr;
@@ -69,16 +89,7 @@ typedef struct s_mlx
 	t_img		img;
 	t_player	player;
 	t_map		map;
+	t_ray		ray;
 }	t_mlx;
-
-typedef enum s_wall
-{
-	NO,
-	SO,
-	EA,
-	WE,
-	C,
-	F
-} t_wall;
 
 #endif

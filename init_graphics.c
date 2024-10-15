@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_graphics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ablanco- <ablanco-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/13 17:50:54 by ablanco-         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:55:00 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	init_the_player(t_mlx *mlx)
 	}
 	mlx->player.plyr_x = (double)(x - 1) * BLOCK_SIZE + BLOCK_SIZE / 2;
 	mlx->player.plyr_y = (double)(y - 1) * BLOCK_SIZE + BLOCK_SIZE / 2;
-	//mlx->player.plyr_x = (double)x - 1 + 0.5;
-	//mlx->player.plyr_y = (double)y - 1 + 0.5;
 	if (mlx->map.matrix[y - 1][x - 1] == PLAYER_N)
 		mlx->player.angle = 0.0;
 	else if (mlx->map.matrix[y - 1][x - 1] == PLAYER_E)
@@ -91,9 +89,11 @@ char	*init_game(t_mlx mlx)
 {
 	t_img		img;
 	t_player	player;
+	t_ray		ray;
 
 	ft_memset(&img, 0, sizeof(t_img));
 	ft_memset(&player, 0, sizeof(t_player));
+	ft_memset(&ray, 0, sizeof(t_ray));
 	img.h = S_H;
 	img.w = S_W;
 	mlx.img.h = img.h;

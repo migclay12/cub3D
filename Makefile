@@ -44,24 +44,6 @@ $(MLX)/libmlx.a:
 
 exe: all
 	@./$(NAME) maps/map0.cub
-#	@./$(NAME) maps/good/test_whitespace.cub
-#	@./$(NAME) map1.cub
-#	@./$(NAME) maps/good/cheese_maze.cub
-#	@./$(NAME) maps/good/creepy.cub
-#	@./$(NAME) maps/good/dungeon.cub
-#	@./$(NAME) maps/good/library.cub
-#	@./$(NAME) maps/good/matrix.cub
-#	@./$(NAME) maps/good/sad_face.cub
-#	@./$(NAME) maps/good/square_map.cub
-#	@./$(NAME) maps/good/subject_map.cub
-#	@./$(NAME) maps/good/test_map_hole.cub
-#	@./$(NAME) maps/good/test_map.cub
-#	@./$(NAME) maps/good/test_pos_bottom.cub
-#	@./$(NAME) maps/good/test_pos_left.cub
-#	@./$(NAME) maps/good/test_pos_right.cub
-#	@./$(NAME) maps/good/test_pos_top.cub
-#	@./$(NAME) maps/good/test_textures.cub
-#	@./$(NAME) maps/good/works.cub
 
 leaks: all
 	valgrind --leak-check=full --track-origins=yes ./$(NAME) maps/map0.cub

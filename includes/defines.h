@@ -21,21 +21,27 @@
 # define KEY_S		115
 # define KEY_D		100
 
-# define S_W	600
-# define S_H	500
+# define S_W	1920
+# define S_H	1200
 
 //Error states
+//Could do error messages aswell?
 # define EMPTY_LINE		-1
 # define EXTRA_START	-2
 # define START_MISSING	-3
 # define WRONG_CHAR		-4
 
 //TESTS
-# define BLOCK_SIZE		64
-# define MOVE_SPEED		0.7
-# define ROTATION_SPEED	0.02
-//Es equivalente a 150º
-# define VIEW_ANGLE		2.6179938779914943653855361527329
-# define NUM_RAYS		300
+# define BLOCK_SIZE		32
+# define MOVE_SPEED		0.2
+# define ROTATION_SPEED	0.005
+//You didn't need so much shit lol
+# define VIEW_ANGLE_150	2.6179938779914943653855361527329
+# define HALF_VIEW_75	1.308996939
+# define NUM_RAYS_150	150
+# define VIEW_ANGLE_120 2.09439510239
+# define HALF_VIEW_60	1.0471975512
+# define NUM_RAYS_120	120
+# define ONE_DEG		0.0174533
 
 #endif

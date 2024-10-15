@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:49:06 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/09 17:51:03 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:48:59 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	ft_exit(t_mlx *mlx)
 	exit(0);
 }
 
-//DOESNT FUCKING WORK
-// Function to check for wall collision based on the player's next position
+//If you wiggle in diagonal it does't work but not important for the moment
 int	is_wall(t_mlx *mlx, double x, double y)
 {
 	int	map_x;
@@ -60,27 +59,24 @@ void	player_rotate(t_mlx *mlx, double angle)
 
 void player_move(t_mlx *mlx, double speed, double angle)
 {
-    double dx;
-    double dy;
+	double dx;
+	double dy;
 
-    // Calculate the direction of movement based on player angle
-    angle += mlx->player.angle;
-    dx = speed * cos(angle);
-    dy = speed * sin(angle);
+	angle += mlx->player.angle;
+	dx = speed * cos(angle);
+	dy = speed * sin(angle);
 
 	//printf("Current Position: (%f, %f)\n", mlx->player.plyr_x, mlx->player.plyr_y);
 	//printf("Next Position: (%f, %f)\n", dx, dy);
 	//printf("Wall Collision X: %d\n", is_wall(mlx, dx, mlx->player.plyr_y));
 	//printf("Wall Collision Y: %d\n", is_wall(mlx, mlx->player.plyr_x, dy));
 
-    // Check if the new position (current position + movement) hits a wall
-    if (!is_wall(mlx, mlx->player.plyr_x + dx, mlx->player.plyr_y + dy))
-    {
-        // If there's no collision, update the player's position
-        mlx->player.plyr_x += dx;
-        mlx->player.plyr_y += dy;
-    }
-    return;
+	if (!is_wall(mlx, mlx->player.plyr_x + dx, mlx->player.plyr_y + dy))
+	{
+		mlx->player.plyr_x += dx;
+		mlx->player.plyr_y += dy;
+	}
+	return;
 }
 
 void	update_player(t_mlx *mlx)
