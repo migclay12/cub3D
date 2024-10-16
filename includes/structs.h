@@ -90,6 +90,7 @@ typedef struct s_mlx
 	t_player	player;
 	t_map		map;
 	t_ray		ray;
+	t_wall_path	path;
 }	t_mlx;
 
 #endif

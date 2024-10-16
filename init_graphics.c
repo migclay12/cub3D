@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/15 14:55:00 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:02:51 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 int	on_loop(t_mlx	*mlx)
 {
 	update_player(mlx);
-	//mlx_clear_window(mlx->ptr, mlx->win); //Epileptic function
 	//printf("ON_LOOP1\n");
-	draw_minimap(mlx);
+	//mlx_clear_window(mlx->ptr, mlx->win); //Epileptic function
+
+	//Esto sirve para que se actualize la imagen
+	//Clear the image buffer (set all pixels to a background color, e.g., black)
+	int *pixels = (int *)mlx->img.addr;
+	for (int i = 0; i < (S_W * S_H); i++)
+		pixels[i] = 0x000000;  // Set all pixels to black
+		
 	//printf("ON_LOOP2\n");
-	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
+	draw_minimap(mlx);
 	//printf("ON_LOOP3\n");
+	draw_walls(mlx);
+	//printf("ON_LOOP4\n");
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
+	//printf("ON_LOOP5\n");
 	return (0);
 }
 
@@ -74,13 +84,13 @@ void	init_the_player(t_mlx *mlx)
 	mlx->player.plyr_x = (double)(x - 1) * BLOCK_SIZE + BLOCK_SIZE / 2;
 	mlx->player.plyr_y = (double)(y - 1) * BLOCK_SIZE + BLOCK_SIZE / 2;
 	if (mlx->map.matrix[y - 1][x - 1] == PLAYER_N)
-		mlx->player.angle = 0.0;
-	else if (mlx->map.matrix[y - 1][x - 1] == PLAYER_E)
-		mlx->player.angle = M_PI_2;
-	else if (mlx->map.matrix[y - 1][x - 1] == PLAYER_S)
-		mlx->player.angle = M_PI;
-	else
 		mlx->player.angle = 3 * M_PI / 2;
+	else if (mlx->map.matrix[y - 1][x - 1] == PLAYER_E)
+		mlx->player.angle = 0;
+	else if (mlx->map.matrix[y - 1][x - 1] == PLAYER_S)
+		mlx->player.angle = M_PI_2;
+	else
+		mlx->player.angle = M_PI;
 	mlx->map.matrix[y - 1][x - 1] = '0';
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:27:35 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/09 17:34:19 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:27:30 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ int	main(int argc, char **argv)
 {
 	t_map		map;
 	t_mlx		mlx;
-	t_wall_path	path;
 
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_memset(&mlx, 0, sizeof(t_mlx));
-	ft_memset(&path, 0, sizeof(t_wall_path));
 	if (argc != 2)
 		ft_print_error("A map name has not been provided");
 	if (argc == 2)
@@ -42,8 +40,8 @@ int	main(int argc, char **argv)
 		map.name = argv[1];
 		mlx.map.name = argv[1];
 	}
-	ft_all_map(&map, &mlx, &path);
-	init_game(mlx);
+	ft_all_map(&map, &mlx);
+	//init_game(mlx);
 	printf("BEFORE FREE\n");
 	ft_free_matrix(map.matrix);
 	printf("BEFORE FREE2\n");

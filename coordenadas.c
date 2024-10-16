@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:06:08 by ablanco-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:03:32 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:28:39 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,15 @@ int	cardinal_count(char *line, int idx, int *textures, t_wall_path *path, t_map 
 	return (map->flag);
 }
 
-void	check_start_map(t_map *map, t_wall_path *path)
+void	check_start_map(t_map *map)
 {
+	t_wall_path	path;
 	char	*line;
 	int		idx;
 	int		flag;
 	int		*textures = calloc(6, sizeof(int));
 	
+	ft_memset(&path, 0, sizeof(t_wall_path));
 	map->flag = 0;
 	flag = 0;
 	line = get_next_line(map->fd);
@@ -120,7 +122,7 @@ void	check_start_map(t_map *map, t_wall_path *path)
 		idx = 0;
 		while (line[idx] == ' ')
 			idx++;
-		flag = cardinal_count(line, idx, textures, path, map);
+		flag = cardinal_count(line, idx, textures, &path, map);
 		free(line);
 		line = get_next_line(map->fd);
 		if (flag == 0)
@@ -129,6 +131,6 @@ void	check_start_map(t_map *map, t_wall_path *path)
 	if (textures[NO] != 1 || textures[SO] != 1 || textures[EA] != 1 \
 		|| textures[WE] != 1 || textures[C] != 1 || textures[F] != 1)
 		ft_print_error("falta o sobra info\n");
-	//check_coordenadas(textures, path);
+	check_coordenadas(textures, &path);
 	free (textures);
 }

@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:49:06 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/15 13:48:59 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:52:38 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ void	update_player(t_mlx *mlx)
 	if (mlx->player.rot_r)
 		player_rotate(mlx, ROTATION_SPEED);
 	if (mlx->player.move_no)
-		player_move(mlx, MOVE_SPEED, -M_PI_2);
+		player_move(mlx, MOVE_SPEED, 0);
 	if (mlx->player.move_so)
-		player_move(mlx, MOVE_SPEED, M_PI_2);
-	if (mlx->player.move_we)
 		player_move(mlx, MOVE_SPEED, M_PI);
+	if (mlx->player.move_we)
+		player_move(mlx, MOVE_SPEED, -M_PI_2);
 	if (mlx->player.move_ea)
-		player_move(mlx, MOVE_SPEED, 0.0);
+		player_move(mlx, MOVE_SPEED, M_PI_2);
 	return ;
 }
 

@@ -25,8 +25,8 @@
 
 //# include <errno.h>
 
-void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path);
-void check_start_map(t_map *map, t_wall_path *path);
+void	ft_all_map(t_map *map, t_mlx *mlx);
+void check_start_map(t_map *map);
 void	start_the_game(t_mlx mlx);
 
 //Errors
@@ -55,7 +55,7 @@ char	*init_game(t_mlx mlx);
 void	draw_minimap(t_mlx *mlx);
 void    line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
 void    put_px(int x, int y, int color, t_img *img);
-void    draw_arrow(t_mlx *mlx, t_shape s);
+void    draw_arrow(t_mlx *mlx);
 
 //void draw_ray(t_mlx *mlx);
 void draw_walls(t_mlx *mlx);

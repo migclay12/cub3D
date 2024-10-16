@@ -42,8 +42,44 @@ $(MLX)/libmlx.a:
 	@echo "Compiling $<..."
 	@gcc $(FLAGS) $(FLAGS_MLX) -c $< -o $@ -I includes
 
+#ive modified a bit the subject map
 exe: all
 	@./$(NAME) maps/map0.cub
+#	@./$(NAME) maps/bad/color_invalid_rgb.cub
+#	@./$(NAME) maps/bad/color_missing_ceiling_rgb.cub
+#	@./$(NAME) maps/bad/color_missing_floor_rgb.cub
+#	@./$(NAME) maps/bad/color_missing.cub
+#	@./$(NAME) maps/bad/color_none.cub
+#	@./$(NAME) maps/bad/empty.cub
+#	@./$(NAME) maps/bad/file_letter_end.cub
+#	@./$(NAME) maps/bad/filetype_missing
+#	@./$(NAME) maps/bad/filetype_wrong.buc
+#	@./$(NAME) maps/bad/forbidden.cub
+#	@./$(NAME) maps/bad/map_first.cub
+#	@./$(NAME) maps/bad/map_middle.cub
+#	@./$(NAME) maps/bad/map_missing.cub
+#	@./$(NAME) maps/bad/map_only.cub
+#	@./$(NAME) maps/bad/map_too_small.cub
+#	@./$(NAME) maps/bad/player_multiple.cub
+#	@./$(NAME) maps/bad/player_none.cub
+#	@./$(NAME) maps/bad/player_on_edge.cub
+#	@./$(NAME) maps/bad/textures_dir.cub
+#	@./$(NAME) maps/bad/textures_duplicates.cub
+#	@./$(NAME) maps/bad/textures_forbidden.cub
+#	@./$(NAME) maps/bad/textures_invalid.cub
+#	@./$(NAME) maps/bad/textures_missing.cub
+#	@./$(NAME) maps/bad/textures_none.cub
+#	@./$(NAME) maps/bad/textures_not_xpm.cub
+#	@./$(NAME) maps/bad/wall_hole_east.cub
+#	@./$(NAME) maps/bad/wall_hole_north.cub
+#	@./$(NAME) maps/bad/wall_hole_south.cub
+#	@./$(NAME) maps/bad/wall_hole_west.cub
+#	@./$(NAME) maps/bad/wall_none.cub
+
+
+#	@./$(NAME) maps/good/subject_map.cub
+#	@./$(NAME) maps/good/cheese_maze.cub
+#	@./$(NAME) maps/map0.cub
 
 leaks: all
 	valgrind --leak-check=full --track-origins=yes ./$(NAME) maps/map0.cub

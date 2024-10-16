@@ -161,11 +161,11 @@ void	ft_print_matrix(t_map *map)
 //asi no tienes que tener un map a parte del mlx
 //could work, quita muchas lineas
 //y organizar los fd wtf XD
-void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path)
+void	ft_all_map(t_map *map, t_mlx *mlx)
 {
 	map->start = 0;
 	map->fd = open(map->name, O_RDONLY);
-	check_start_map(map, path);
+	check_start_map(map);
 	close (map->fd);
 	mlx->map.line_start_map = ft_strdup(map->line_start_map); //Free at some point
 	mlx->map.start_line = map->start_line;
@@ -186,5 +186,5 @@ void	ft_all_map(t_map *map, t_mlx *mlx, t_wall_path *path)
 	//printf("END\n");
 	ft_validate(map);
 	free(mlx->map.line_start_map);
-	free(map->line_start_map);
+	//free(map->line_start_map);
 }

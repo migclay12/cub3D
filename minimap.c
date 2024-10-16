@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:58:31 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/15 18:19:33 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:47:55 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	draw_player_minimap(t_mlx *mlx, t_shape s, int sx, int sy)
 	//draw_arrow(mlx, s);
 	//printf("PLAYER0\n");
 	//draw_ray(mlx);
-	draw_walls(mlx);
+	//draw_walls(mlx);
 	//printf("PLAYER1\n");
 }
 
