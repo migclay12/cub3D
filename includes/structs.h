@@ -79,6 +79,10 @@ typedef struct s_ray
 	//double		long_ray;
 	double		wall_dist;
 	int			wall_height;
+	void		*wall_no;
+	void		*wall_ae;
+	void		*wall_so;
+	void		*wall_we;
 	t_wall		wall_dir;
 }	t_ray;
 

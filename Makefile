@@ -45,6 +45,7 @@ $(MLX)/libmlx.a:
 #ive modified a bit the subject map
 exe: all
 	@./$(NAME) maps/map0.cub
+#	@./$(NAME) maps/good/subject_map.cub
 #	@./$(NAME) maps/bad/color_invalid_rgb.cub
 #	@./$(NAME) maps/bad/color_missing_ceiling_rgb.cub
 #	@./$(NAME) maps/bad/color_missing_floor_rgb.cub

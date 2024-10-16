@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/16 15:02:51 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:54:58 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ void	init_the_player(t_mlx *mlx)
 	return ;
 }
 
+void	save_xpm(t_mlx *mlx)
+{
+	//mlx->path.NO_path
+	mlx->ray.wall_no = mlx_xpm_file_to_image(mlx->ptr,
+				"textures/purplestone.xpm", BLOCK_SIZE, BLOCK_SIZE);
+}
+
 char	*init_game(t_mlx mlx)
 {
 	t_img		img;
@@ -110,6 +117,9 @@ char	*init_game(t_mlx mlx)
 	mlx.img.w = img.w;
 	//printf("INIT_GAME\n");
 	init_the_player(&mlx);
+
+	save_xpm(&mlx);
+	
 	//printf("INIT_GAME1\n");
 	init_graphics(&mlx);
 	//printf("INIT_GAME2\n");
