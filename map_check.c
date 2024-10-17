@@ -274,15 +274,15 @@ void	ft_check_coma(t_mlx *mlx)
 	
 	i = 0;
 	coma = 0;
-	while (mlx->path.F_color[i])
+	while (mlx->path.C_color[i])
 	{
-		if (mlx->path.F_color[i] == ',')
+		if (mlx->path.C_color[i] == ',')
 			coma++;
 		i++;
 	}
 	//If there is a coma at the end but no other colour does it count?
 	if (coma > 2)
-		ft_print_error("There are too many floor clours");
+		ft_print_error("There are too many ceiling clours");
 }
 
 /* void	ft_save_colors(t_mlx *mlx)
@@ -312,7 +312,7 @@ void	ft_all_map(t_mlx *mlx)
 	ft_memset(&map, 0, sizeof(t_map));
 	init_map(mlx);
 	ft_open_file(mlx);
-	printf("WTF1\n");
+	//printf("WTF1\n");
 	check_start_map(mlx);
 	close (mlx->map.fd);
 
@@ -320,13 +320,13 @@ void	ft_all_map(t_mlx *mlx)
 
 	if (mlx->map.start == 0)
 		ft_char_error(&mlx->map, ' ', -1, START_MISSING);
-	printf("WTF2\n");
+	//printf("WTF2\n");
 	mlx->map.fd = open(mlx->map.name, O_RDONLY);
 	mlx->map.matrix = ft_save_map(mlx);
 	close (mlx->map.fd);
-	printf("WTF3\n");
+	//printf("WTF3\n");
 	ft_validate(&mlx->map);
-	printf("WTF4\n");
+	//printf("WTF4\n");
 	//ft_print_matrix(map);
 	ft_free_matrix(mlx->map.matrix);
 	mlx->map.fd = open(mlx->map.name, O_RDONLY);
