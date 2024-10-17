@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:57:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/16 20:32:11 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:26:34 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,5 @@ void draw_walls(t_mlx *mlx)
 		i += 1;
 		ray_angle += (VIEW_ANGLE_120 / 1920);
 	}
-
 	free(distances);
 }

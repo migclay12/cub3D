@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 //if in last one no \n or spaces after stuff what do we doo?
-void	ft_mlx_lines(t_map *map, char *line)
+/* void	ft_mlx_lines(t_map *map, char *line)
 {
 	int	i;
 
@@ -82,28 +82,7 @@ void	ft_map_size(t_map *map)
 	if (temp != NULL)
 		map->size_y--;
 	//printf("Size y: %d\nSize x: %d\n", map->size_y, map->size_x);
-}
-
-int	ft_map_name(char *map)
-{
-	int	len;
-
-	len = ft_strlen(map);
-	if (map[len - 1] == 'b' && map[len - 2] == 'u'
-		&& map[len - 3] == 'c' && map[len - 4] == '.')
-		return (1);
-	return (0);
-}
-
-void	ft_open_file(t_map *map)
-{
-	printf("MAP: %s\n", map->name);
-	map->fd = open(map->name, O_RDONLY);
-	if (!ft_map_name(map->name))
-		ft_print_error("The file map is not .cub");
-	if (map->fd == -1)
-		ft_print_error("The file map does not exist");
-}
+} 
 
 char	**ft_save_map(t_map *map)
 {
@@ -141,50 +120,218 @@ char	**ft_save_map(t_map *map)
 	map->matrix[i] = NULL;
 	//printf("SUCCES\n");
 	return (map->matrix);
+} */
+
+void	ft_mlx_lines_2(t_mlx *mlx, char *line)
+{
+	int	i;
+
+	i = 0;
+	while (i < (int)ft_strlen(line) - 2)
+	{
+		//printf("%c - ", line[i]);
+		if (!ft_str(VAL_CHAR, line[i]))
+			ft_char_error(&mlx->map, line[i], i, WRONG_CHAR);
+		if (ft_str(P_STARTS, line[i]))
+			mlx->map.start++;
+		if (mlx->map.start > 1)
+			ft_char_error(&mlx->map, line[i], i, EXTRA_START);
+		i++;
+	}
 }
 
-void	ft_print_matrix(t_map *map)
+void	ft_map_size_2(t_mlx *mlx, char *line)
+{
+	char	*temp;
+	int		flag;
+
+	flag = 0;
+	//printf("LAST LINE MAP1: %s\n", map->line_start_map);
+	if (line != NULL)
+	{
+		//printf("IIIIIIIIIN: %s", line);
+		if (line)
+			temp = remove_spaces(line);
+		//printf("IN: %s", temp);
+		if (temp != NULL)
+		{
+			//printf("IM IN TEMP\n");
+			mlx->map.size_y++;
+			if (line && (int)ft_strlen(temp) - 2 > mlx->map.size_x)
+				mlx->map.size_x = ft_strlen(temp) - 2;
+			if (line)
+				ft_mlx_lines_2(mlx, temp);
+			if (line && (int)ft_strlen(temp) - 2 != 0 && flag == -1)
+				ft_char_error(&mlx->map, ' ', -1, EMPTY_LINE);
+		}
+		else
+			flag = -1;
+	}
+	//if (temp == NULL)
+	//	mlx->map.size_y--;
+	//printf("Size y: %d\nSize x: %d\n", mlx->map.size_y, mlx->map.size_x);
+}
+
+char	**ft_save_map(t_mlx *mlx)
+{
+	int		i;
+	char	*temp;
+
+	//printf("START: %d\n", mlx->map.start_line);
+	mlx->map.matrix = malloc(sizeof(char **) * (mlx->map.size_y + 1));
+	if (!mlx->map.matrix)
+		return (0);
+	i = 0;
+	while (i < mlx->map.start_line)
+	{
+		temp = get_next_line(mlx->map.fd);
+		//printf("TEMP: %s", temp);
+		free (temp);
+		i++;
+	}
+	i = 0;
+	//printf("IN?! %d\n", mlx->map.size_y);
+	while (i <= mlx->map.size_y)
+	{
+		temp = get_next_line(mlx->map.fd);
+		//printf("TEMP2: %s", temp);
+		mlx->map.matrix[i] = malloc(sizeof(char) * (ft_strlen(temp) + 1));
+		if (!mlx->map.matrix[i])
+		{
+			//printf("ERROR %d\n", i);	
+			return (ft_free_map(mlx->map.matrix, i));
+		}
+		ft_strlcpy(mlx->map.matrix[i], temp, ft_strlen(temp) + 1);
+		free (temp);
+		i++;
+	}
+	mlx->map.matrix[i] = NULL;
+	//printf("SUCCES\n");
+	return (mlx->map.matrix);
+}
+
+int	ft_map_name(char *map)
+{
+	int	len;
+
+	len = ft_strlen(map);
+	if (map[len - 1] == 'b' && map[len - 2] == 'u'
+		&& map[len - 3] == 'c' && map[len - 4] == '.')
+		return (1);
+	return (0);
+}
+
+void	ft_open_file(t_mlx *mlx)
+{
+	printf("MAP: %s\n", mlx->map.name);
+	mlx->map.fd = open(mlx->map.name, O_RDONLY);
+	if (!ft_map_name(mlx->map.name))
+		ft_print_error("The file map is not .cub");
+	if (mlx->map.fd == -1)
+		ft_print_error("The file map does not exist");
+}
+
+void	ft_print_matrix(t_mlx *mlx)
 {
 	int	i;
 
 	i = 0;
 	//printf("IMN GOING INSANE\n");
-	while (i < map->size_y)
+	while (i < mlx->map.size_y)
 	{
 		//printf("wtf\n");
-		printf("%s", map->matrix[i]);
+		printf("%s", mlx->map.matrix[i]);
 		i++;
 	}
 }
 
-//GURADAR MAPA, validarlo, limpiarlo y vlverlo a guardar?
-//asi no tienes que tener un map a parte del mlx
-//could work, quita muchas lineas
-//y organizar los fd wtf XD
-void	ft_all_map(t_map *map, t_mlx *mlx)
+void init_map(t_mlx *mlx)
 {
-	map->start = 0;
-	map->fd = open(map->name, O_RDONLY);
-	check_start_map(map);
-	close (map->fd);
-	mlx->map.line_start_map = ft_strdup(map->line_start_map); //Free at some point
-	mlx->map.start_line = map->start_line;
-	ft_open_file(map);
-	ft_open_file(&mlx->map);
-	ft_map_size(map);
-	ft_map_size(&mlx->map);
-	close (map->fd);
+	mlx->map.size_y = 0;
+	mlx->map.size_x = 0;
+	mlx->map.start = 0;
+	mlx->map.start_line = 0;
+	mlx->map.flag = 0;
+}
+
+//Just use a fucking char *colour
+void	ft_check_coma(t_mlx *mlx)
+{
+	int	coma;
+	int	i;
+
+	i = 0;
+	coma = 0;
+	while (mlx->path.F_color[i])
+	{
+		if (mlx->path.F_color[i] == ',')
+			coma++;
+		i++;
+	}
+	//If there is a coma at the end but no other colour does it count?
+	if (coma > 2)
+		ft_print_error("There are too many floor clours");
+	
+	i = 0;
+	coma = 0;
+	while (mlx->path.F_color[i])
+	{
+		if (mlx->path.F_color[i] == ',')
+			coma++;
+		i++;
+	}
+	//If there is a coma at the end but no other colour does it count?
+	if (coma > 2)
+		ft_print_error("There are too many floor clours");
+}
+
+/* void	ft_save_colors(t_mlx *mlx)
+{
+	char **rgb;
+
+	rgb = ft_split(color, ',');
+	if (type == 'F')
+	{
+		
+	}
+}
+
+void	ft_check_rgb(t_mlx *mlx)
+{
+
+	ft_check_coma(mlx);
+	ft_save_colors(mlx);
+} */
+
+//save_map coud make it work for mlx->map and map
+//so you don't have to open it and close it twice
+void	ft_all_map(t_mlx *mlx)
+{
+	t_map		map;
+
+	ft_memset(&map, 0, sizeof(t_map));
+	init_map(mlx);
+	ft_open_file(mlx);
+	printf("WTF1\n");
+	check_start_map(mlx);
 	close (mlx->map.fd);
-	if (map->start == 0)
-		ft_char_error(map, ' ', -1, START_MISSING);
-	map->fd = open(map->name, O_RDONLY);
-	mlx->map.fd = open(map->name, O_RDONLY);
-	map->matrix = ft_save_map(map);
-	mlx->map.matrix = ft_save_map(&mlx->map);
+
+	
+
+	if (mlx->map.start == 0)
+		ft_char_error(&mlx->map, ' ', -1, START_MISSING);
+	printf("WTF2\n");
+	mlx->map.fd = open(mlx->map.name, O_RDONLY);
+	mlx->map.matrix = ft_save_map(mlx);
+	close (mlx->map.fd);
+	printf("WTF3\n");
+	ft_validate(&mlx->map);
+	printf("WTF4\n");
 	//ft_print_matrix(map);
-	ft_print_matrix(&mlx->map);
+	ft_free_matrix(mlx->map.matrix);
+	mlx->map.fd = open(mlx->map.name, O_RDONLY);
+	mlx->map.matrix = ft_save_map(mlx);
+	close (mlx->map.fd);
+	ft_print_matrix(mlx);
 	//printf("END\n");
-	ft_validate(map);
-	free(mlx->map.line_start_map);
-	//free(map->line_start_map);
 }

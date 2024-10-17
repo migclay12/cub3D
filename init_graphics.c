@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/16 20:54:58 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:23:21 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ char	*init_graphics(t_mlx *mlx)
 			&mlx->img.line, &mlx->img.end);
 	//printf("INIT_GRAPHICS4\n");
 	hook_events(mlx);
-	//printf("INIT_GRAPHICS5\n");
+	printf("INIT_GRAPHICS5\n");
 	mlx_loop(mlx->ptr);
+	printf("la locuraaaaaaaaaaaaaaaaaaaaaaaa\n");
 	return (NULL);
 }
 
@@ -95,12 +96,12 @@ void	init_the_player(t_mlx *mlx)
 	return ;
 }
 
-void	save_xpm(t_mlx *mlx)
+/* void	save_xpm(t_mlx *mlx)
 {
 	//mlx->path.NO_path
 	mlx->ray.wall_no = mlx_xpm_file_to_image(mlx->ptr,
 				"textures/purplestone.xpm", BLOCK_SIZE, BLOCK_SIZE);
-}
+} */
 
 char	*init_game(t_mlx mlx)
 {
@@ -118,10 +119,12 @@ char	*init_game(t_mlx mlx)
 	//printf("INIT_GAME\n");
 	init_the_player(&mlx);
 
-	save_xpm(&mlx);
+	//save_xpm(&mlx);
 	
 	//printf("INIT_GAME1\n");
+
 	init_graphics(&mlx);
+	
 	//printf("INIT_GAME2\n");
 	return (NULL);
 }

@@ -25,9 +25,11 @@
 
 //# include <errno.h>
 
-void	ft_all_map(t_map *map, t_mlx *mlx);
-void check_start_map(t_map *map);
+void	ft_all_map(t_mlx *mlx);
+void    check_start_map(t_mlx *mlx);
 void	start_the_game(t_mlx mlx);
+void	ft_map_size_2(t_mlx *mlx, char *line);
+void	ft_mlx_lines_2(t_mlx *mlx, char *line);
 
 //Errors
 void	ft_print_error(char *str);

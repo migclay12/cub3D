@@ -42,6 +42,12 @@ typedef struct s_mlx_img
 	int		bpp;
 	int		line;
 	int		end;
+	int		f_r;
+	int		f_g;
+	int		f_b;
+	int		c_r;
+	int		c_g;
+	int		c_b;
 }	t_img;
 
 typedef struct s_map
@@ -69,7 +75,6 @@ typedef struct s_wall_path
 	char *WE_path;
 	char *C_color;
 	char *F_color;
-
 } t_wall_path;
 
 typedef struct s_ray
