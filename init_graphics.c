@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/17 20:23:21 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:04:54 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	on_loop(t_mlx	*mlx)
 		pixels[i] = 0x000000;  // Set all pixels to black
 		
 	//printf("ON_LOOP2\n");
-	draw_minimap(mlx);
 	//printf("ON_LOOP3\n");
 	draw_walls(mlx);
 	//printf("ON_LOOP4\n");
+	draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 	//printf("ON_LOOP5\n");
 	return (0);
@@ -120,7 +120,7 @@ char	*init_game(t_mlx mlx)
 	init_the_player(&mlx);
 
 	//save_xpm(&mlx);
-	
+
 	//printf("INIT_GAME1\n");
 
 	init_graphics(&mlx);

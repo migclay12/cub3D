@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:57:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/17 20:26:34 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:11:21 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ double *draw_ray(t_mlx *mlx)
 	return (distances);
 }
 
+int	create_tgrb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
 void draw_walls(t_mlx *mlx)
 {
 	int i = 0;
@@ -93,9 +98,12 @@ void draw_walls(t_mlx *mlx)
 	double *distances = draw_ray(mlx);
 	double ray_angle = mlx->player.angle - (VIEW_ANGLE_120 / 2.0);
 
+	mlx->ray.flo = create_tgrb(mlx->ray.f_r, mlx->ray.f_g, mlx->ray.f_b);
+	mlx->ray.cei = create_tgrb(mlx->ray.c_r, mlx->ray.c_g, mlx->ray.c_b);
+	
 	while (i < S_W)
 	{
-		double dist = distances[j];
+		double dist = distances[i];
 		if (dist > 0)
 		{
 			double corrected_dist = dist * cos(ray_angle - mlx->player.angle);
@@ -106,12 +114,56 @@ void draw_walls(t_mlx *mlx)
 
 			if (wall_start < 0) wall_start = 0;
 			if (wall_end > S_H) wall_end = S_H;
-
+			
+			j = 0;
+			while (j < S_H / 2)
+			{
+				put_px(i, j, mlx->ray.cei, &mlx->img);
+				//put_px(x, WIN_Y - 1 - y, game->flo, &game->scr);
+				j++;
+			}
+			j = S_H / 2;
+			while (j < S_H)
+			{
+				put_px(i, j, mlx->ray.flo, &mlx->img);
+				//put_px(x, WIN_Y - 1 - y, game->flo, &game->scr);
+				j++;
+			}
+			
 			draw_vertical_line(mlx, i, wall_start, wall_end, 0xff2955);
 		}
-		j++;
+		
 		i += 1;
 		ray_angle += (VIEW_ANGLE_120 / 1920);
 	}
 	free(distances);
 }
+
+/* void	draw_screen(t_game *game, t_ray *rays)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = -1;
+	while (++i < N_RAYS)
+	{
+		rays[i].wall_dist *= cos(game->p.dir - rays[i].angle_abs);
+		rays[i].wall_height = (int)(WIN_Y / rays[i].wall_dist);
+		rays[i].draw_height = rays[i].wall_height;
+		if (rays[i].draw_height > WIN_Y)
+			rays[i].draw_height = WIN_Y;
+		y = -1;
+		while (++y < (WIN_Y - rays[i].draw_height) / 2)
+		{
+			x = i * (WIN_X / N_RAYS) - 1;
+			while (++x < (i + 1) * (WIN_X / N_RAYS))
+			{
+				put_px(x, y, game->cei, &game->scr);
+				put_px(x, WIN_Y - 1 - y, game->flo, &game->scr);
+			}
+		}
+		draw_wall(game, &rays[i], i * (WIN_X / N_RAYS), y);
+	}
+	return ;
+} */
