@@ -21,12 +21,12 @@ void	check_coordenadas(int *textures, t_mlx *mlx)
 	printf("numero C es %d\n", textures[C]);
 	printf("numero F es %d\n", textures[F]);
 
-	printf("PATH de NO es %s", mlx->path.NO_path);
-	printf("PATH de SO es %s", mlx->path.SO_path);
-	printf("PATH de EA es %s", mlx->path.EA_path);
-	printf("PATH de WE es %s", mlx->path.WE_path);
-	printf("C_COLOR es %s", mlx->path.C_color);
-	printf("F_COLOR es %s", mlx->path.F_color);
+	printf("PATH de NO es %s\n", mlx->path.NO_path);
+	printf("PATH de SO es %s\n", mlx->path.SO_path);
+	printf("PATH de EA es %s\n", mlx->path.EA_path);
+	printf("PATH de WE es %s\n", mlx->path.WE_path);
+	printf("C_COLOR es %s\n", mlx->path.C_color);
+	printf("F_COLOR es %s\n", mlx->path.F_color);
 }
 
 void	save_path(char **cardinal, char *line, int idx, int sum_idx)
@@ -98,6 +98,7 @@ void	cardinal_count(t_mlx *mlx, char *line, int idx, int *textures)
 	if ((textures[NO] == 1 || textures[SO] == 1 || textures[EA] == 1 || 
 	textures[WE] == 1 || textures[C]== 1 || textures[F]== 1) && line[idx] == 49 && mlx->map.flag == 0)
 	{
+		//printf("LINEEEE: %s\n", line);
 		ft_map_size_2(mlx, line);
 		mlx->map.flag = 1;
 	}
@@ -112,7 +113,6 @@ void	check_start_map(t_mlx *mlx)
 
 	ft_memset(&path, 0, sizeof(t_wall_path));
 	line = get_next_line(mlx->map.fd);
-	printf("JIJI QUE HA HECHO MI MIGUI \n");
 	while (line)
 	{
 		idx = 0;

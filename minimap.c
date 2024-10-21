@@ -45,8 +45,11 @@ void	draw_minimap_floor(t_mlx *mlx, int sx, int sy, t_shape shape)
 	while (y < mlx->map.size_y)
 	{
 		x = 0;
-		while (x <= mlx->map.size_x)
+		//printf("Y: %d - ", y);
+		//while (x < mlx->map.size_x)
+		while (mlx->map.matrix[y][x])
 		{
+			//printf("X: %d - ", x);
 			shape.x = y * BLOCK_SIZE + sx;
 			shape.y = x * BLOCK_SIZE + sy;
 			if (mlx->map.matrix[y][x] && mlx->map.matrix[y][x] == '0')
@@ -68,7 +71,8 @@ void	draw_walls_minimap(t_mlx *mlx, int sx, int sy, t_shape shape)
 	while (y < mlx->map.size_y)
 	{
 		x = 0;
-		while (x <= mlx->map.size_x)
+		//while (x < mlx->map.size_x)
+		while (mlx->map.matrix[y][x])
 		{
 			shape.x = y * BLOCK_SIZE + sx;
 			shape.y = x * BLOCK_SIZE + sy;
@@ -138,4 +142,5 @@ void	draw_minimap(t_mlx *mlx)
 	//printf("CCCCCCCCCCCC\n");
 	draw_player_minimap(mlx, shape, startx, starty);
 	//printf("EEEEEEEEEEEE\n");
+	//draw_ray(mlx);
 }

@@ -127,7 +127,7 @@ void	ft_mlx_lines_2(t_mlx *mlx, char *line)
 	int	i;
 
 	i = 0;
-	while (i < (int)ft_strlen(line) - 2)
+	while (i < (int)ft_strlen(line))
 	{
 		//printf("%c - ", line[i]);
 		if (!ft_str(VAL_CHAR, line[i]))
@@ -146,22 +146,22 @@ void	ft_map_size_2(t_mlx *mlx, char *line)
 	int		flag;
 
 	flag = 0;
-	//printf("LAST LINE MAP1: %s\n", map->line_start_map);
+	//printf("LAST LINE MAP1: %s\n", line);
 	if (line != NULL)
 	{
-		//printf("IIIIIIIIIN: %s", line);
+		//printf("IIIIIIIIIN: %s\n", line);
 		if (line)
 			temp = remove_spaces(line);
-		//printf("IN: %s", temp);
+		//printf("IN: %s.\n", temp);
 		if (temp != NULL)
 		{
 			//printf("IM IN TEMP\n");
 			mlx->map.size_y++;
-			if (line && (int)ft_strlen(temp) - 2 > mlx->map.size_x)
-				mlx->map.size_x = ft_strlen(temp) - 2;
+			if (line && (int)ft_strlen(temp) > mlx->map.size_x)
+				mlx->map.size_x = ft_strlen(temp);
 			if (line)
 				ft_mlx_lines_2(mlx, temp);
-			if (line && (int)ft_strlen(temp) - 2 != 0 && flag == -1)
+			if (line && (int)ft_strlen(temp) != 0 && flag == -1)
 				ft_char_error(&mlx->map, ' ', -1, EMPTY_LINE);
 		}
 		else
@@ -185,16 +185,19 @@ char	**ft_save_map(t_mlx *mlx)
 	while (i < mlx->map.start_line)
 	{
 		temp = get_next_line(mlx->map.fd);
-		//printf("TEMP: %s", temp);
+		//printf("TEMP: %s\n", temp);
 		free (temp);
 		i++;
 	}
 	i = 0;
 	//printf("IN?! %d\n", mlx->map.size_y);
-	while (i <= mlx->map.size_y)
+	while (i < mlx->map.size_y)
 	{
+		//printf("???\n");
 		temp = get_next_line(mlx->map.fd);
-		//printf("TEMP2: %s", temp);
+		if (!temp) //Si quitas esto a veces peta idk why
+			printf("ERROR %d\n", i);	
+		//printf("TEMP2: %s\n", temp);
 		mlx->map.matrix[i] = malloc(sizeof(char) * (ft_strlen(temp) + 1));
 		if (!mlx->map.matrix[i])
 		{
@@ -240,7 +243,7 @@ void	ft_print_matrix(t_mlx *mlx)
 	while (i < mlx->map.size_y)
 	{
 		//printf("wtf\n");
-		printf("%s", mlx->map.matrix[i]);
+		printf("%s\n", mlx->map.matrix[i]);
 		i++;
 	}
 }
@@ -252,98 +255,6 @@ void init_map(t_mlx *mlx)
 	mlx->map.start = 0;
 	mlx->map.start_line = 0;
 	mlx->map.flag = 0;
-}
-
-//Just use a fucking char *colour
-void	ft_check_coma(t_mlx *mlx)
-{
-	int	coma;
-	int	i;
-
-	i = 0;
-	coma = 0;
-	while (mlx->path.F_color[i])
-	{
-		if (mlx->path.F_color[i] == ',')
-			coma++;
-		i++;
-	}
-	//If there is a coma at the end but no other colour does it count?
-	if (coma > 2)
-		ft_print_error("There are too many floor clours");
-	
-	i = 0;
-	coma = 0;
-	while (mlx->path.C_color[i])
-	{
-		if (mlx->path.C_color[i] == ',')
-			coma++;
-		i++;
-	}
-	//If there is a coma at the end but no other colour does it count?
-	if (coma > 2)
-		ft_print_error("There are too many ceiling clours");
-}
-
-void	ft_check_digit(char **rgb)
-{
-	//Change the error messages
-	int i;
-	int j;
-
-	i = 0;
-	while (rgb[i])
-	{
-		j = 0;
-		while (rgb[i][j] != '\r' && rgb[i][j] != '\n' && rgb[i][j] != '\0')
-		{
-			//printf("THE FUCKIG RGBING %c\n", rgb[i][j]);
-			if (!ft_isdigit(rgb[i][j]))
-				ft_print_error("IT'S NOT A FUCKING NUMBEEEEEEEEEEER");
-			j++;
-		}
-		i++;
-	}
-	i = 0;
-	while (rgb[i])
-	{
-		j = ft_atoi(rgb[i]);
-		if (j < 0 || j > 255)
-			ft_print_error("THE RGB NUMBER IS OUT OF BOUNDS");
-		i++;
-	}
-}
-
-void	ft_save_colors(t_mlx *mlx)
-{
-	char **rgb;
-
-	rgb = ft_split(mlx->path.F_color, ',');
-	ft_check_digit(rgb);
-	mlx->ray.f_r = ft_atoi(rgb[0]);
-	mlx->ray.f_g = ft_atoi(rgb[1]);
-	mlx->ray.f_b = ft_atoi(rgb[2]);
-	ft_free_matrix(rgb);
-	rgb = ft_split(mlx->path.C_color, ',');
-	ft_check_digit(rgb);
-	mlx->ray.c_r = ft_atoi(rgb[0]);
-	mlx->ray.c_g = ft_atoi(rgb[1]);
-	mlx->ray.c_b = ft_atoi(rgb[2]);
-	ft_free_matrix(rgb);
-	printf("RGBBBBBF: %d\n", mlx->ray.f_r);
-	printf("RGBBBBBF: %d\n", mlx->ray.f_g);
-	printf("RGBBBBBF: %d\n", mlx->ray.f_b);
-	printf("RGBBBBBC: %d\n", mlx->ray.c_r);
-	printf("RGBBBBBC: %d\n", mlx->ray.c_g);
-	printf("RGBBBBBC: %d\n", mlx->ray.c_b);
-
-}
-
-void	ft_check_rgb(t_mlx *mlx)
-{
-
-	ft_check_coma(mlx);
-	ft_save_colors(mlx);
 }
 
 //save_map coud make it work for mlx->map and map
@@ -359,6 +270,7 @@ void	ft_all_map(t_mlx *mlx)
 	check_start_map(mlx);
 	close (mlx->map.fd);
 
+	//printf("NO MAP: %s\n", mlx->path.NO_path);
 	ft_check_rgb(mlx);
 
 	if (mlx->map.start == 0)
@@ -370,11 +282,9 @@ void	ft_all_map(t_mlx *mlx)
 	//printf("WTF3\n");
 	ft_validate(&mlx->map);
 	//printf("WTF4\n");
-	//ft_print_matrix(map);
 	ft_free_matrix(mlx->map.matrix);
 	mlx->map.fd = open(mlx->map.name, O_RDONLY);
 	mlx->map.matrix = ft_save_map(mlx);
 	close (mlx->map.fd);
 	ft_print_matrix(mlx);
-	//printf("END\n");
 }

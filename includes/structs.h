@@ -19,12 +19,12 @@ typedef struct s_shape
 	int	height;
 }	t_shape;
 
-typedef struct s_player //the player structure
+typedef struct s_player
 {
-	double		plyr_x;
-	double		plyr_y;
-	char		orient;
-	double		angle;
+	double	plyr_x;
+	double	plyr_y;
+	char	orient;
+	double	angle;
 	int		move_no;
 	int		move_so;
 	int		move_we;
@@ -39,25 +39,22 @@ typedef struct s_mlx_img
 	int		h;
 	void	*ptr;
 	char	*addr;
-	int		bpp;
+	int		bpp; //investigar que es esto
 	int		line;
 	int		end;
 }	t_img;
 
 typedef struct s_map
 {
-	int		fd;
-	char	*name;
-	int		size_x;
-	int		size_y;
-	int		start;
-	char	**matrix;
-	char	*line_start_map;
-	int		start_line;
-	// int		p_x; 
-	// int		p_y; 
-	// char	p_or;
-	int		flag; //temporal para las coordenadas
+	int			fd;
+	char		*name;
+	int			size_x;
+	int			size_y;
+	int			start;
+	char		**matrix;
+	char		*line_start_map;
+	int			start_line;
+	int			flag; //temporal para las coordenadas
 	t_player	player;
 }	t_map;
 
@@ -73,15 +70,17 @@ typedef struct s_wall_path
 
 typedef struct s_ray
 {
-	double		x;
-	double		y;
-	//double		long_ray;
-	double		wall_dist;
-	int			wall_height;
-	void		*wall_no;
-	void		*wall_ae;
-	void		*wall_so;
-	void		*wall_we;
+	double	x;
+	double	y;
+	double	*distances;
+	int		*sides;
+	double	*ray_x;
+	double	*ray_y;
+	int		wall_height;
+	t_img	wall_no;
+	t_img	wall_ea;
+	t_img	wall_so;
+	t_img	wall_we;
 	int		f_r;
 	int		f_g;
 	int		f_b;
@@ -90,7 +89,7 @@ typedef struct s_ray
 	int		c_b;
 	int		cei;
 	int		flo;
-	t_wall		wall_dir;
+	t_wall	wall_dir;
 }	t_ray;
 
 typedef struct s_mlx

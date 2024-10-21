@@ -81,7 +81,7 @@ char	*ft_getline(char **buf, int fd)
 	unsigned int	j;
 
 	i = 0;
-	while (buf[0][i] != '\n' && buf[0][i] != '\0')
+	while (buf[0][i] != '\n' && buf[0][i] != '\0' && buf[0][i] != '\r')
 	{
 		if (buf[0][i + 1] == '\0')
 			ft_bufjoin(buf, fd);

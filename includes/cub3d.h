@@ -62,4 +62,10 @@ void    draw_arrow(t_mlx *mlx);
 //void draw_ray(t_mlx *mlx);
 void draw_walls(t_mlx *mlx);
 
+void	ft_check_rgb(t_mlx *mlx);
+
+//double *draw_ray(t_mlx *mlx);
+
+void	save_xpm(t_mlx *mlx);
+
 #endif

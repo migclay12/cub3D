@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-//Hay un leak al liberar la matriz wtf
 void	ft_free_matrix(char **matrix)
 {
 	int	i;
@@ -44,3 +43,11 @@ int	main(int argc, char **argv)
 	ft_free_matrix(mlx.map.matrix);
 	printf("OFFICIAL END\n");
 }
+
+/* NO textures/wolfenstein/grey_stone.xpm
+SO textures/wolfenstein/purple_stone.xpm
+WE textures/wolfenstein/red_brick.xpm
+EA textures/wolfenstein/wood.xpm
+
+F 220,100,0
+C 225,30,0 */

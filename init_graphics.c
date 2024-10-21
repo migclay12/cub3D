@@ -28,7 +28,7 @@ int	on_loop(t_mlx	*mlx)
 	//printf("ON_LOOP3\n");
 	draw_walls(mlx);
 	//printf("ON_LOOP4\n");
-	draw_minimap(mlx);
+	//draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 	//printf("ON_LOOP5\n");
 	return (0);
@@ -43,7 +43,7 @@ static inline void	hook_events(t_mlx *mlx)
 	mlx_hook(mlx->win, 3, 1L << 1, on_key_release, mlx);
 	return ;
 }
-
+//hacer checkeo de todo lo que se inicializa
 char	*init_graphics(t_mlx *mlx)
 {
 	//printf("INIT_GRAPHICS\n");
@@ -56,10 +56,11 @@ char	*init_graphics(t_mlx *mlx)
 	mlx->img.addr = mlx_get_data_addr(mlx->img.ptr, &mlx->img.bpp,
 			&mlx->img.line, &mlx->img.end);
 	//printf("INIT_GRAPHICS4\n");
+	save_xpm(mlx);
+	//printf("INIT_GRAPHICS5\n");
 	hook_events(mlx);
-	printf("INIT_GRAPHICS5\n");
+	//printf("INIT_GRAPHICS6\n");
 	mlx_loop(mlx->ptr);
-	printf("la locuraaaaaaaaaaaaaaaaaaaaaaaa\n");
 	return (NULL);
 }
 
@@ -96,13 +97,6 @@ void	init_the_player(t_mlx *mlx)
 	return ;
 }
 
-/* void	save_xpm(t_mlx *mlx)
-{
-	//mlx->path.NO_path
-	mlx->ray.wall_no = mlx_xpm_file_to_image(mlx->ptr,
-				"textures/purplestone.xpm", BLOCK_SIZE, BLOCK_SIZE);
-} */
-
 char	*init_game(t_mlx mlx)
 {
 	t_img		img;
@@ -118,8 +112,6 @@ char	*init_game(t_mlx mlx)
 	mlx.img.w = img.w;
 	//printf("INIT_GAME\n");
 	init_the_player(&mlx);
-
-	//save_xpm(&mlx);
 
 	//printf("INIT_GAME1\n");
 
