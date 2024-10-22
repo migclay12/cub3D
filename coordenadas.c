@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:06:08 by ablanco-          #+#    #+#             */
-/*   Updated: 2024/10/17 20:20:45 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:14:26 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ void	check_coordenadas(int *textures, t_mlx *mlx)
 	printf("PATH de SO es %s\n", mlx->path.SO_path);
 	printf("PATH de EA es %s\n", mlx->path.EA_path);
 	printf("PATH de WE es %s\n", mlx->path.WE_path);
-	printf("C_COLOR es %s\n", mlx->path.C_color);
 	printf("F_COLOR es %s\n", mlx->path.F_color);
+	printf("C_COLOR es %s\n", mlx->path.C_color);
 }
 
 void	save_path(char **cardinal, char *line, int idx, int sum_idx)
 {
+	//He cambiado el strlen dentro del strdup restandole uno pq seguia
+	//cogiendo algun puto caracter basura y ya me estaba comiendo la cabeza
+	//intentando arreglar esa mierda de alguna manera decente
 	idx = idx + sum_idx;
 	while (line[idx] == ' ')
 		idx++;

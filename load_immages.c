@@ -13,16 +13,14 @@ void	make_image_from_xpm(void *mlx_ptr, t_img *img, char *xpm)
 
 void	save_xpm(t_mlx *mlx)
 {
-	//printf("NO: %s\n", mlx->path.NO_path);
-
 	//Hacer esta comprobacion pero donde toca
 	if (mlx->ptr == NULL)
-    	ft_print_error("Failed to initialize MLX");
+		ft_print_error("Failed to initialize MLX");
 
-/* 	printf("Loading NO texture: %s\n", mlx->path.NO_path);
+	printf("Loading NO texture: %s\n", mlx->path.NO_path);
 	printf("Loading EA texture: %s\n", mlx->path.EA_path);
 	printf("Loading SO texture: %s\n", mlx->path.SO_path);
-	printf("Loading WE texture: %s\n", mlx->path.WE_path); */
+	printf("Loading WE texture: %s\n", mlx->path.WE_path);
 
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_no, mlx->path.NO_path);
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_ea, mlx->path.EA_path);

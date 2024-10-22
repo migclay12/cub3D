@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:36:59 by miggonza          #+#    #+#             */
-/*   Updated: 2024/09/26 14:49:13 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/22 12:19:06 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ char *remove_spaces(char *str)
 
 	i = 0;
 	start = 0;
-	if ((int)ft_strlen(str) - 2 == 0)
+	if ((int)ft_strlen(str) == 0)
 	{
 		//printf("RETURN\n");
 		return (NULL);
 	}
-	while (i <= (int)ft_strlen(str) - 2)
+	while (i <= (int)ft_strlen(str))
 	{
 		if (str[i] == '1')
 			start = i + 1;
 		i++;
 	}
 	i = start;
-	while (i <= (int)ft_strlen(str) - 2)
+	while (i <= (int)ft_strlen(str))
 	{
 		//printf("STR: %c\n", str[i]);
 		if (str[i] != ' ' && str[i + 1] != '\n')

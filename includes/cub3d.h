@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
-# include <stdint.h> // For uint32_t
+//# include <stdint.h> // For uint32_t
 # include "../libft/libft.h"
 # include "defines.h"
 # include "structs.h"

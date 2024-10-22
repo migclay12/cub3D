@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:58:31 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/16 13:47:55 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:53:46 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	draw_minimap_floor(t_mlx *mlx, int sx, int sy, t_shape shape)
 
 	y = 0;
 	x = 0;
-	shape.width = BLOCK_SIZE;
-	shape.height = BLOCK_SIZE;
+	shape.width = BLOCK_SIZE_MAP;
+	shape.height = BLOCK_SIZE_MAP;
 	//printf("DRAW_FLOOR: %d\n", mlx->map.size_y);
 	while (y < mlx->map.size_y)
 	{
@@ -50,8 +50,8 @@ void	draw_minimap_floor(t_mlx *mlx, int sx, int sy, t_shape shape)
 		while (mlx->map.matrix[y][x])
 		{
 			//printf("X: %d - ", x);
-			shape.x = y * BLOCK_SIZE + sx;
-			shape.y = x * BLOCK_SIZE + sy;
+			shape.x = y * BLOCK_SIZE_MAP + sx;
+			shape.y = x * BLOCK_SIZE_MAP + sy;
 			if (mlx->map.matrix[y][x] && mlx->map.matrix[y][x] == '0')
 				rect(mlx, shape, 0xFFFFFFFF);
 			x++;
@@ -74,8 +74,8 @@ void	draw_walls_minimap(t_mlx *mlx, int sx, int sy, t_shape shape)
 		//while (x < mlx->map.size_x)
 		while (mlx->map.matrix[y][x])
 		{
-			shape.x = y * BLOCK_SIZE + sx;
-			shape.y = x * BLOCK_SIZE + sy;
+			shape.x = y * BLOCK_SIZE_MAP + sx;
+			shape.y = x * BLOCK_SIZE_MAP + sy;
 			if (mlx->map.matrix[y][x] && mlx->map.matrix[y][x] == '1')
 				rect(mlx, shape, 0xBB4211); //RED
 			x++;
@@ -112,8 +112,8 @@ void	draw_player_minimap(t_mlx *mlx, t_shape s, int sx, int sy)
 {
 	s.width = BLOCK_SIZE / 2;
 	s.height = BLOCK_SIZE / 2;
-	s.x = (int)(mlx->player.plyr_y + sx - s.width / 2); //* BLOCK_SIZE + sx - s.width / 2);
-	s.y = (int)(mlx->player.plyr_x + sy - s.height / 2); //* BLOCK_SIZE + sy - s.height / 2);
+	s.x = (int)(mlx->player.plyr_y + sx - s.width / 2); //* BLOCK_SIZE_MAP + sx - s.width / 2);
+	s.y = (int)(mlx->player.plyr_x + sy - s.height / 2); //* BLOCK_SIZE_MAP + sy - s.height / 2);
 	circle(mlx, s, 0x1630BE);
 	//draw_arrow(mlx, s);
 	//printf("PLAYER0\n");
@@ -131,8 +131,8 @@ void	draw_minimap(t_mlx *mlx)
 	//printf("AAAAAAAAAAAA\n");
 	ft_memset(&shape, 0, sizeof(t_shape));
 	shape.x = 0;
-	shape.width = BLOCK_SIZE;
-	shape.height = BLOCK_SIZE;
+	shape.width = BLOCK_SIZE_MAP;
+	shape.height = BLOCK_SIZE_MAP;
 	starty = 0;
 	startx = 0;
 	//printf("PLACE: %d\n", mlx->player.plyr_x);

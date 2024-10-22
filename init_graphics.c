@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/17 22:04:54 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:50:28 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	on_loop(t_mlx	*mlx)
 	//printf("ON_LOOP3\n");
 	draw_walls(mlx);
 	//printf("ON_LOOP4\n");
-	//draw_minimap(mlx);
+	draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 	//printf("ON_LOOP5\n");
 	return (0);

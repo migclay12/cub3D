@@ -1,7 +1,7 @@
 #include "cub3d.h"
 
 //This is usefull because the imaes stop flickering and stay static
-void put_px(int x, int y, int color, t_img *img)
+/* void put_px(int x, int y, int color, t_img *img)
 {
 	char *dst;
 
@@ -10,7 +10,23 @@ void put_px(int x, int y, int color, t_img *img)
 	
 	// Set the pixel's color
 	*(unsigned int*)dst = color;
+} */
+
+void put_px(int x, int y, int color, t_img *img)
+{
+    char *dst;
+
+    // Ensure the coordinates are within the image boundaries
+    if (x < 0 || x >= img->w || y < 0 || y >= img->h)
+        return;  // Do nothing if out of bounds
+
+    // Get the memory address of the pixel at (x, y) in the image
+    dst = img->addr + (y * img->line + x * (img->bpp / 8));
+    
+    // Set the pixel's color
+    *(unsigned int*)dst = color;
 }
+
 
 // Bresenham's Line Algorithm
 void line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color)

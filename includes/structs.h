@@ -73,9 +73,9 @@ typedef struct s_ray
 	double	x;
 	double	y;
 	double	*distances;
-	int		*sides;
 	double	*ray_x;
 	double	*ray_y;
+	int		*vertical_hit;
 	int		wall_height;
 	t_img	wall_no;
 	t_img	wall_ea;

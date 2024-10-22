@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:27:35 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/17 20:22:21 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/22 12:22:30 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_free_matrix(char **matrix)
 	}
 	free(matrix);
 }
+
+//FUCKING FT_STRLEN() WORKS DIFFEREN IN MAC AND WINDOWS
 
 //Make a lot more of error management
 //Errors should liberate the info

@@ -122,12 +122,14 @@ char	**ft_save_map(t_map *map)
 	return (map->matrix);
 } */
 
+//Check the hole fucking thing
+//And check the removespaces function because with the changes I think it does't work the same
 void	ft_mlx_lines_2(t_mlx *mlx, char *line)
 {
 	int	i;
 
 	i = 0;
-	while (i < (int)ft_strlen(line))
+	while (i < (int)ft_strlen(line) - 1)
 	{
 		//printf("%c - ", line[i]);
 		if (!ft_str(VAL_CHAR, line[i]))
@@ -243,7 +245,7 @@ void	ft_print_matrix(t_mlx *mlx)
 	while (i < mlx->map.size_y)
 	{
 		//printf("wtf\n");
-		printf("%s\n", mlx->map.matrix[i]);
+		printf("%s", mlx->map.matrix[i]);
 		i++;
 	}
 }

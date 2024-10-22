@@ -42,11 +42,15 @@ void	ft_check_digit(char **rgb)
 	{
 		j = 0;
 		//while (rgb[i][j] != '\r' && rgb[i][j] != '\n' && rgb[i][j] != '\0')
-		while(rgb[i][j])
+		//while(rgb[i][j])
+		while (j < ft_strlen(rgb[i]) - 1)
 		{
 			//printf("THE FUCKIG RGBING %c\n", rgb[i][j]);
 			if (!ft_isdigit(rgb[i][j]))
+			{
+				printf("WTF?!: %c", rgb[i][j]);
 				ft_print_error("IT'S NOT A FUCKING NUMBEEEEEEEEEEER");
+			}
 			j++;
 		}
 		i++;
@@ -77,12 +81,12 @@ void	ft_save_colors(t_mlx *mlx)
 	mlx->ray.c_g = ft_atoi(rgb[1]);
 	mlx->ray.c_b = ft_atoi(rgb[2]);
 	ft_free_matrix(rgb);
-	printf("RGBBBBBF: %d\n", mlx->ray.f_r);
-	printf("RGBBBBBF: %d\n", mlx->ray.f_g);
-	printf("RGBBBBBF: %d\n", mlx->ray.f_b);
-	printf("RGBBBBBC: %d\n", mlx->ray.c_r);
-	printf("RGBBBBBC: %d\n", mlx->ray.c_g);
-	printf("RGBBBBBC: %d\n", mlx->ray.c_b);
+	printf("RGB-F: %d\n", mlx->ray.f_r);
+	printf("RGB-F: %d\n", mlx->ray.f_g);
+	printf("RGB-F: %d\n", mlx->ray.f_b);
+	printf("RGB-C: %d\n", mlx->ray.c_r);
+	printf("RGB-C: %d\n", mlx->ray.c_g);
+	printf("RGB-C: %d\n", mlx->ray.c_b);
 
 }
 

@@ -32,9 +32,10 @@
 # define WRONG_CHAR		-4
 
 //TESTS
-# define BLOCK_SIZE		16
-# define MOVE_SPEED		1
-# define ROTATION_SPEED	0.08
+# define BLOCK_SIZE		64
+# define BLOCK_SIZE_MAP	16
+# define MOVE_SPEED		6
+# define ROTATION_SPEED	0.18
 //I think this is 90
 # define FOV			1.3962634016
 
