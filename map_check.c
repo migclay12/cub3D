@@ -195,7 +195,6 @@ char	**ft_save_map(t_mlx *mlx)
 	//printf("IN?! %d\n", mlx->map.size_y);
 	while (i < mlx->map.size_y)
 	{
-		//printf("???\n");
 		temp = get_next_line(mlx->map.fd);
 		if (!temp) //Si quitas esto a veces peta idk why
 			printf("ERROR %d\n", i);	
@@ -203,7 +202,7 @@ char	**ft_save_map(t_mlx *mlx)
 		mlx->map.matrix[i] = malloc(sizeof(char) * (ft_strlen(temp) + 1));
 		if (!mlx->map.matrix[i])
 		{
-			//printf("ERROR %d\n", i);	
+			printf("ERROR %d\n", i);	
 			return (ft_free_map(mlx->map.matrix, i));
 		}
 		ft_strlcpy(mlx->map.matrix[i], temp, ft_strlen(temp) + 1);
@@ -245,7 +244,7 @@ void	ft_print_matrix(t_mlx *mlx)
 	while (i < mlx->map.size_y)
 	{
 		//printf("wtf\n");
-		printf("%s", mlx->map.matrix[i]);
+		printf("%s\n", mlx->map.matrix[i]);
 		i++;
 	}
 }
@@ -277,11 +276,11 @@ void	ft_all_map(t_mlx *mlx)
 
 	if (mlx->map.start == 0)
 		ft_char_error(&mlx->map, ' ', -1, START_MISSING);
-	//printf("WTF2\n");
+	printf("WTF2\n");
 	mlx->map.fd = open(mlx->map.name, O_RDONLY);
 	mlx->map.matrix = ft_save_map(mlx);
 	close (mlx->map.fd);
-	//printf("WTF3\n");
+	printf("WTF3\n");
 	ft_validate(&mlx->map);
 	//printf("WTF4\n");
 	ft_free_matrix(mlx->map.matrix);

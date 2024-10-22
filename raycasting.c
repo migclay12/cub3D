@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:57:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/22 17:55:45 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/22 20:19:37 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,100 @@ void draw_vertical_line(t_mlx *mlx, int x, int start_y, int end_y, int color)
 	}
 } */
 
+/* void draw_ray(t_mlx *mlx)
+{
+	float ray_step = 0.5;
+	float angle = mlx->player.angle - (FOV / 2.0);
+	int rays = 0;
+	mlx->ray.distances = (double *)malloc(sizeof(double) * 1920);
+	mlx->ray.ray_x = (double *)malloc(sizeof(double) * 1920);
+	mlx->ray.ray_y = (double *)malloc(sizeof(double) * 1920);
+	mlx->ray.vertical_hit = (int *)malloc(sizeof(int) * 1920); // Track vertical hits
+
+	while (rays < 1920)
+	{
+		float dir_x = cos(angle);
+		float dir_y = sin(angle);
+		mlx->ray.ray_x[rays] = mlx->player.plyr_x;
+		mlx->ray.ray_y[rays] = mlx->player.plyr_y;
+		
+		// Initialize DDA variables
+		double delta_dist_x = fabs(1 / dir_x);
+		double delta_dist_y = fabs(1 / dir_y);
+		double side_dist_x, side_dist_y;
+		int step_x, step_y;
+		int hit = 0;  // Flag for wall hit
+		int side;     // 0 for NS, 1 for EW
+
+		// Calculate step direction and initial side distances
+		if (dir_x < 0)
+		{
+			step_x = -1;
+			side_dist_x = (mlx->player.plyr_x - (int)mlx->player.plyr_x) * delta_dist_x;
+		}
+		else
+		{
+			step_x = 1;
+			side_dist_x = ((int)mlx->player.plyr_x + 1.0 - mlx->player.plyr_x) * delta_dist_x;
+		}
+		if (dir_y < 0)
+		{
+			step_y = -1;
+			side_dist_y = (mlx->player.plyr_y - (int)mlx->player.plyr_y) * delta_dist_y;
+		}
+		else
+		{
+			step_y = 1;
+			side_dist_y = ((int)mlx->player.plyr_y + 1.0 - mlx->player.plyr_y) * delta_dist_y;
+		}
+
+		// Perform DDA
+		while (!hit)
+		{
+			// Move to next grid square in either x or y direction
+			if (side_dist_x < side_dist_y)
+			{
+				side_dist_x += delta_dist_x;
+				mlx->ray.ray_x[rays] += step_x;
+				side = 0;  // Vertical hit
+			}
+			else
+			{
+				side_dist_y += delta_dist_y;
+				mlx->ray.ray_y[rays] += step_y;
+				side = 1;  // Horizontal hit
+			}
+
+			// Check if we hit a wall
+			if (is_wall_ray(mlx, mlx->ray.ray_x[rays], mlx->ray.ray_y[rays]))
+				hit = 1;
+		}
+
+		// Calculate distance to the wall
+		int no_or_we;
+		if (side == 0) // NS wall hit
+		{
+			printf("DIR Y: %d\n", dir_y);
+			mlx->ray.distances[rays] = (mlx->ray.ray_x[rays] - mlx->player.plyr_x + (1 - step_x) / 2) / dir_x;
+			if (dir_y < 0)
+				mlx->ray.vertical_hit[rays] = 0;  //North
+			else
+				mlx->ray.vertical_hit[rays] = 1;  //south
+		}
+		else // EW wall hit
+		{
+			mlx->ray.distances[rays] = (mlx->ray.ray_y[rays] - mlx->player.plyr_y + (1 - step_y) / 2) / dir_y; 
+			if (dir_x < 0)
+            	mlx->ray.vertical_hit[rays] = 2;  //West
+			else
+				mlx->ray.vertical_hit[rays] = 3;  //East
+		}
+
+		angle += (FOV / 1920);
+		rays++;
+	}
+} */
+
 void draw_ray(t_mlx *mlx)
 {
     float ray_step = 0.5;
@@ -75,6 +169,8 @@ void draw_ray(t_mlx *mlx)
     mlx->ray.ray_x = (double *)malloc(sizeof(double) * 1920);
     mlx->ray.ray_y = (double *)malloc(sizeof(double) * 1920);
     mlx->ray.vertical_hit = (int *)malloc(sizeof(int) * 1920); // Track vertical hits
+    mlx->ray.ray_dir_x = (double *)malloc(sizeof(double) * 1920); // Store ray direction x
+    mlx->ray.ray_dir_y = (double *)malloc(sizeof(double) * 1920); // Store ray direction y
 
     while (rays < 1920)
     {
@@ -83,6 +179,9 @@ void draw_ray(t_mlx *mlx)
         mlx->ray.ray_x[rays] = mlx->player.plyr_x;
         mlx->ray.ray_y[rays] = mlx->player.plyr_y;
         
+        mlx->ray.ray_dir_x[rays] = dir_x;  // Save direction for later
+        mlx->ray.ray_dir_y[rays] = dir_y;  // Save direction for later
+
         // Initialize DDA variables
         double delta_dist_x = fabs(1 / dir_x);
         double delta_dist_y = fabs(1 / dir_y);
@@ -153,6 +252,7 @@ void draw_ray(t_mlx *mlx)
 }
 
 
+
 int	create_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
@@ -187,8 +287,13 @@ void draw_wall_ew(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 	int pixel;
 	int draw_height = wall_end - wall_start;
 
-	img = &mlx->ray.wall_ea;
+		img = &mlx->ray.wall_we;
 	dx = 0;
+	printf("RAY X: %f\n", ray->ray_dir_x[num]);
+	if (ray->ray_dir_x[num] > 0)
+		img = &mlx->ray.wall_ea;
+	else
+		img = &mlx->ray.wall_we;
 	while (dx < (S_W / 1920))
 	{
 		dy = 0;
@@ -218,10 +323,14 @@ void draw_wall_ns(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 	int dx, dy;
 	int tx, ty;
 	int pixel;
-	int draw_height = wall_end - wall_start;  // Height of the wall being drawn on screen
+	int draw_height = wall_end - wall_start;
 
-	img = &mlx->ray.wall_no;  // Assuming this is your wall texture
-	dx = 0;  // Horizontal scaling remains fixed
+	dx = 0;
+	printf("RAY Y: %f\n", ray->ray_dir_y[num]);
+	if (ray->ray_dir_y[num] > 0)
+		img = &mlx->ray.wall_so;
+	else
+		img = &mlx->ray.wall_no;
 	while (dx < (S_W / 1920))
 	{
 		dy = 0;
@@ -280,7 +389,7 @@ void draw_walls(t_mlx *mlx)
 					put_px(i, j, mlx->ray.cei, &mlx->img);
 				j++;
 			}
-			if (mlx->ray.vertical_hit[i])
+			if (mlx->ray.vertical_hit[i] == 1)
 				draw_wall_ew(mlx, &mlx->ray, i * (S_W / 1920), wall_start, wall_end, i);
 			else
 				draw_wall_ns(mlx, &mlx->ray, i * (S_W / 1920), wall_start, wall_end, i);
