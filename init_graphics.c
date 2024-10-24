@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:51:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/22 17:50:28 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:56:19 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	on_loop(t_mlx	*mlx)
 		pixels[i] = 0x000000;  // Set all pixels to black
 		
 	//printf("ON_LOOP2\n");
-	//printf("ON_LOOP3\n");
 	draw_walls(mlx);
-	//printf("ON_LOOP4\n");
+	//printf("ON_LOOP3\n");
 	draw_minimap(mlx);
+	//printf("ON_LOOP4\n");
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 	//printf("ON_LOOP5\n");
 	return (0);
@@ -48,13 +48,19 @@ char	*init_graphics(t_mlx *mlx)
 {
 	//printf("INIT_GRAPHICS\n");
 	mlx->ptr = mlx_init();
+	if (!mlx->ptr)
+		ft_print_error("Game not initialized properly");
 	//printf("INIT_GRAPHICS1\n");
 	mlx->win = mlx_new_window(mlx->ptr, S_W, S_H, "work you little fuck");
+	if (!mlx->win)
+		ft_print_error("Window not initialized properly");
 	//printf("INIT_GRAPHICS2\n");
 	mlx->img.ptr = mlx_new_image(mlx->ptr, S_W, S_H);
 	//printf("INIT_GRAPHICS3\n");
 	mlx->img.addr = mlx_get_data_addr(mlx->img.ptr, &mlx->img.bpp,
 			&mlx->img.line, &mlx->img.end);
+	if (!mlx->img.ptr)
+		ft_print_error("Image pointer not initalized properly");
 	//printf("INIT_GRAPHICS4\n");
 	save_xpm(mlx);
 	//printf("INIT_GRAPHICS5\n");

@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:57:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/22 20:19:37 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:41:54 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ void draw_wall_ew(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 
 		img = &mlx->ray.wall_we;
 	dx = 0;
-	printf("RAY X: %f\n", ray->ray_dir_x[num]);
+	//printf("RAY X: %f\n", ray->ray_dir_x[num]);
 	if (ray->ray_dir_x[num] > 0)
 		img = &mlx->ray.wall_ea;
 	else
@@ -326,7 +326,7 @@ void draw_wall_ns(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 	int draw_height = wall_end - wall_start;
 
 	dx = 0;
-	printf("RAY Y: %f\n", ray->ray_dir_y[num]);
+	//printf("RAY Y: %f\n", ray->ray_dir_y[num]);
 	if (ray->ray_dir_y[num] > 0)
 		img = &mlx->ray.wall_so;
 	else
@@ -402,6 +402,8 @@ void draw_walls(t_mlx *mlx)
 	free(mlx->ray.ray_x);
 	free(mlx->ray.ray_y);
 	free(mlx->ray.vertical_hit);
+	free(mlx->ray.ray_dir_x);
+	free(mlx->ray.ray_dir_y);
 }
 
 /* void draw_wall(t_mlx *mlx, int x, int wall_start, int wall_end)

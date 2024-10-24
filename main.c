@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:27:35 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/22 12:22:30 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:13:31 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,24 @@ void	ft_free_matrix(char **matrix)
 	free(matrix);
 }
 
-//FUCKING FT_STRLEN() WORKS DIFFEREN IN MAC AND WINDOWS
+//Poner los errores in englis
+//Comprobar la validacion de muros y cambiar los mensajes pq no coinciden con lo que pasa
+//aunq el mensaje viene de coordenadas cuando no encuentra un muro lol
+
+//Fucking remove_spaces has to be remaked
+//Check if you put in a solitary line a 1 with nothing else
+
+//maps/bad/forbiden works because the player is protected by walls
+//maps/bad/player_on_edge.cub should't work but it fucking does
+//maps/bad/wall_hole_north.cub does't see the hole at the top
+//maps/bad/wall_hole_south.cub same fucking thing
 
 //Make a lot more of error management
 //Errors should liberate the info
-//What happens if F o C existe pero no da info?
+//La flecha del minimapa tecncamente no esta en el centro del ugador pero como para darse cuenta
+//además igual hay que quitar esa funcion pe es enorme (pero me gusta)
+
+//maps/bad/file_letter_end.cub -- mirar que hacer con eso?
 int	main(int argc, char **argv)
 {
 	t_mlx		mlx;
@@ -45,11 +58,3 @@ int	main(int argc, char **argv)
 	ft_free_matrix(mlx.map.matrix);
 	printf("OFFICIAL END\n");
 }
-
-/* NO textures/wolfenstein/grey_stone.xpm
-SO textures/wolfenstein/purple_stone.xpm
-WE textures/wolfenstein/red_brick.xpm
-EA textures/wolfenstein/wood.xpm
-
-F 220,100,0
-C 225,30,0 */

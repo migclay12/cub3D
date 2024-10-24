@@ -1,5 +1,33 @@
 #include "cub3d.h"
 
+void	ft_previous_check(char *str)
+{
+	int	i;
+	int	num;
+	int flag;
+
+	flag = 0;
+	num = 0;
+	i = 0;
+	while (i < (int)ft_strlen(str) - 1)
+	{
+		while (str[i] == ' ')
+			i++;
+		//printf("WTF?!: %c.\n", str[i]);
+		while (ft_isdigit(str[i]) && i < (int)ft_strlen(str) - 1)
+		{
+			num++;
+			i++;
+			//printf("WTF?!: %c.\n", str[i]);
+		}
+		if (flag == 0)
+			flag = num;
+		if (flag != num)
+			ft_print_error("There is a space between numbers");
+		i++;
+	}
+}
+
 //Just use a fucking char *colour
 void	ft_check_coma(t_mlx *mlx)
 {
@@ -39,22 +67,34 @@ void	ft_check_digit(char **rgb)
 
 	i = 0;
 	while (rgb[i])
+		i++;
+	//printf("INT: %i\n", i);
+	if (i != 3 || rgb[i - 1] == NULL)
+		ft_print_error("There is a colour missing");
+	i = 0;
+	while (rgb[i])
 	{
 		j = 0;
 		//while (rgb[i][j] != '\r' && rgb[i][j] != '\n' && rgb[i][j] != '\0')
 		//while(rgb[i][j])
-		while (j < ft_strlen(rgb[i]) - 1)
+		//printf ("RGB: %s.\n", rgb[i]);
+		//printf("RGB\n");
+		ft_previous_check(rgb[i]);
+		while (j < (int)ft_strlen(rgb[i]) - 1)
 		{
-			//printf("THE FUCKIG RGBING %c\n", rgb[i][j]);
-			if (!ft_isdigit(rgb[i][j]))
+			while (rgb[i][j] == ' ')
+				j++;
+			//printf("THE FUCKIG RGBING %c.\n", rgb[i][j]);
+			if (!ft_isdigit(rgb[i][j]) && j < (int)ft_strlen(rgb[i]) - 1)
 			{
-				printf("WTF?!: %c", rgb[i][j]);
+				//printf("WTF?!: %c.\n", rgb[i][j]);
 				ft_print_error("IT'S NOT A FUCKING NUMBEEEEEEEEEEER");
 			}
 			j++;
 		}
 		i++;
 	}
+	//printf("RGB2\n");
 	i = 0;
 	while (rgb[i])
 	{
@@ -81,18 +121,17 @@ void	ft_save_colors(t_mlx *mlx)
 	mlx->ray.c_g = ft_atoi(rgb[1]);
 	mlx->ray.c_b = ft_atoi(rgb[2]);
 	ft_free_matrix(rgb);
-	printf("RGB-F: %d\n", mlx->ray.f_r);
+/* 	printf("RGB-F: %d\n", mlx->ray.f_r);
 	printf("RGB-F: %d\n", mlx->ray.f_g);
 	printf("RGB-F: %d\n", mlx->ray.f_b);
 	printf("RGB-C: %d\n", mlx->ray.c_r);
 	printf("RGB-C: %d\n", mlx->ray.c_g);
-	printf("RGB-C: %d\n", mlx->ray.c_b);
+	printf("RGB-C: %d\n", mlx->ray.c_b); */
 
 }
 
 void	ft_check_rgb(t_mlx *mlx)
 {
-
 	ft_check_coma(mlx);
 	ft_save_colors(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 13:36:59 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/22 12:19:06 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:58:16 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ char *remove_spaces(char *str)
 
 	i = 0;
 	start = 0;
-	if ((int)ft_strlen(str) == 0)
+	if ((int)ft_strlen(str) - 1 == 0)
 	{
-		//printf("RETURN\n");
+		//printf("RETURN -1\n");
 		return (NULL);
 	}
+	//printf("LEN: %d\n", (int)ft_strlen(str));
 	while (i <= (int)ft_strlen(str))
 	{
 		if (str[i] == '1')
@@ -60,26 +61,26 @@ char *remove_spaces(char *str)
 	while (i <= (int)ft_strlen(str))
 	{
 		//printf("STR: %c\n", str[i]);
-		if (str[i] != ' ' && str[i + 1] != '\n')
+		if (str[i] != ' ' && str[i] != '\n')
 		{
-			//printf("RETURN0\n");
+			//printf("RETURN 0\n");
 			return (str);
 		}
 		i++;
 	}
-	if (start == 0 && str[start] != '\n')
+	if (start == 0 && str[start] == '\n')
 	{
-		//printf("RETURN1\n");
+		//printf("RETURN 1\n");
 		return (NULL);
 	}
 	else if (str[start] == '\n' && start != 0)
 	{
-		//printf("RETURN2\n");
+		//printf("RETURN 2\n");
 		return (str);
 	}
 	else
 	{
-		//printf("RETURN3\n");
+		//printf("RETURN 3\n");
 		//str[start] = '\n';
 		str[start + 1] = '\0';
 	}

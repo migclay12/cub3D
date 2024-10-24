@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:06:08 by ablanco-          #+#    #+#             */
-/*   Updated: 2024/10/22 13:14:26 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:08:01 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	cardinal_count(t_mlx *mlx, char *line, int idx, int *textures)
 		ft_print_error("Caracter no valido identificado");
 	if ((textures[NO] != 1 || textures[SO] != 1 || textures[EA] != 1 || 
 			textures[WE] != 1 || textures[C] != 1 || textures[F] != 1) && line[idx] == 49)
-		ft_print_error("un uno se ha perdido");
+		ft_print_error("Falta un color o textura por guardarse o hay de mas");
 	if ((textures[NO] == 1 || textures[SO] == 1 || textures[EA] == 1 || 
 	textures[WE] == 1 || textures[C]== 1 || textures[F]== 1) && line[idx] == 49 && mlx->map.flag == 0)
 	{
@@ -131,7 +131,7 @@ void	check_start_map(t_mlx *mlx)
 	}
 	if (textures[NO] != 1 || textures[SO] != 1 || textures[EA] != 1 \
 		|| textures[WE] != 1 || textures[C] != 1 || textures[F] != 1)
-		ft_print_error("falta o sobra info\n");
-	check_coordenadas(textures, mlx);
+		ft_print_error("falta o sobra info");
+	//check_coordenadas(textures, mlx);
 	free (textures);
 }

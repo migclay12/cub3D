@@ -6,24 +6,11 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:49:06 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/16 14:52:38 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:24:03 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_exit(t_mlx *mlx)
-{
-	ft_free_matrix(mlx->map.matrix);
-	mlx_clear_window(mlx->ptr, mlx->win);
-	mlx_destroy_window(mlx->ptr, mlx->win);
-	mlx_destroy_display(mlx->ptr);
-	free(mlx->ptr);
-	//mlx_close_window(mlx->ptr);
-	//mlx_terminate(mlx->ptr);
-	printf("Game closed\n");
-	exit(0);
-}
 
 //If you wiggle in diagonal it does't work but not important for the moment
 int	is_wall(t_mlx *mlx, double x, double y)
@@ -61,17 +48,25 @@ void player_move(t_mlx *mlx, double speed, double angle)
 {
 	double dx;
 	double dy;
+	int size_x;
+	int size_y;
 
 	angle += mlx->player.angle;
 	dx = speed * cos(angle);
 	dy = speed * sin(angle);
-
 	//printf("Current Position: (%f, %f)\n", mlx->player.plyr_x, mlx->player.plyr_y);
 	//printf("Next Position: (%f, %f)\n", dx, dy);
 	//printf("Wall Collision X: %d\n", is_wall(mlx, dx, mlx->player.plyr_y));
 	//printf("Wall Collision Y: %d\n", is_wall(mlx, mlx->player.plyr_x, dy));
-
-	if (!is_wall(mlx, mlx->player.plyr_x + dx, mlx->player.plyr_y + dy))
+	if (dx < 0)
+		size_x = -16;
+	else
+		size_x = 16;
+	if (dy < 0)
+		size_y = -16;
+	else
+		size_y = 16;
+	if (!is_wall(mlx, mlx->player.plyr_x + dx + size_x, mlx->player.plyr_y + dy + size_y))
 	{
 		mlx->player.plyr_x += dx;
 		mlx->player.plyr_y += dy;

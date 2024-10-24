@@ -57,7 +57,7 @@ char	*init_game(t_mlx mlx);
 void	draw_minimap(t_mlx *mlx);
 void    line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
 void    put_px(int x, int y, int color, t_img *img);
-void    draw_arrow(t_mlx *mlx);
+void    draw_arrow(t_mlx *mlx, t_shape s);
 
 //void draw_ray(t_mlx *mlx);
 void draw_walls(t_mlx *mlx);

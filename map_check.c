@@ -12,116 +12,6 @@
 
 #include "cub3d.h"
 
-//if in last one no \n or spaces after stuff what do we doo?
-/* void	ft_mlx_lines(t_map *map, char *line)
-{
-	int	i;
-
-	i = 0;
-	while (i < (int)ft_strlen(line) - 2)
-	{
-		//printf("%c - ", line[i]);
-		if (!ft_str(VAL_CHAR, line[i]))
-			ft_char_error(map, line[i], i, WRONG_CHAR);
-		if (ft_str(P_STARTS, line[i]))
-			map->start++;
-		if (map->start > 1)
-			ft_char_error(map, line[i], i, EXTRA_START);
-		i++;
-	}
-}
-
-//The flag is to mlx if there is an empty line in the middle of the file
-//Si le metes un enter debajo del mapa cuenta bien las lineas
-//do I need temp?
-//Y si haces un bucle while i < map->start_line
-//que valla pasando lineas con el gnl asi no tienes que hacer comprobaciones raras?
-void	ft_map_size(t_map *map)
-{
-	char	*line;
-	char	*temp;
-	int		flag;
-	int		flag2;
-
-	flag = 0;
-	flag2 = 0;
-	map->size_y = 0;
-	map->size_x = 0;
-	line = "start";
-	//printf("LAST LINE MAP1: %s\n", map->line_start_map);
-	while (line != NULL)
-	{
-		line = get_next_line(map->fd);
-		//printf("LINEEEE: %s", line);
-		if (flag2 == 0 && ft_strncmp(line, map->line_start_map,
-				ft_strlen(line)) == 0)
-		{
-			//printf("WTF?!\n");
-			flag2 = 1;
-		}
-		if (flag2 == 1)
-		{
-			//printf("IIIIIIIIIN: %s", line);
-			if (line)
-				temp = remove_spaces(line);
-			if (temp != NULL)
-			{
-				map->size_y++;
-				if (line && (int)ft_strlen(temp) - 2 > map->size_x)
-					map->size_x = ft_strlen(temp) - 2;
-				if (line)
-					ft_mlx_lines(map, temp);
-				if (line && (int)ft_strlen(temp) - 2 != 0 && flag == -1)
-					ft_char_error(map, ' ', -1, EMPTY_LINE);
-			}
-			else
-				flag = -1;
-		}
-		free(line);
-	}
-	if (temp != NULL)
-		map->size_y--;
-	//printf("Size y: %d\nSize x: %d\n", map->size_y, map->size_x);
-} 
-
-char	**ft_save_map(t_map *map)
-{
-	int		i;
-	char	*temp;
-
-	//printf("START: %d\n", map->start_line);
-	map->matrix = malloc(sizeof(char **) * (map->size_y + 1));
-	if (!map->matrix)
-		return (0);
-	i = 0;
-	while (i < map->start_line)
-	{
-		temp = get_next_line(map->fd);
-		//printf("TEMP: %s", temp);
-		free (temp);
-		i++;
-	}
-	i = 0;
-	//printf("IN?! %d\n", map->size_y);
-	while (i < map->size_y)
-	{
-		temp = get_next_line(map->fd);
-		//printf("TEMP2: %s", temp);
-		map->matrix[i] = malloc(sizeof(char) * (ft_strlen(temp) + 1));
-		if (!map->matrix[i])
-		{
-			//printf("ERROR %d\n", i);	
-			return (ft_free_map(map->matrix, i));
-		}
-		ft_strlcpy(map->matrix[i], temp, ft_strlen(temp) + 1);
-		free (temp);
-		i++;
-	}
-	map->matrix[i] = NULL;
-	//printf("SUCCES\n");
-	return (map->matrix);
-} */
-
 //Check the hole fucking thing
 //And check the removespaces function because with the changes I think it does't work the same
 void	ft_mlx_lines_2(t_mlx *mlx, char *line)
@@ -142,35 +32,35 @@ void	ft_mlx_lines_2(t_mlx *mlx, char *line)
 	}
 }
 
+//The y error message does't work when there are a lot of enters en el
+//mapa pq y no cuenta entonces la info es erronea
 void	ft_map_size_2(t_mlx *mlx, char *line)
 {
 	char	*temp;
-	int		flag;
+	//int		flag;
 
-	flag = 0;
+	//flag = 0;
 	//printf("LAST LINE MAP1: %s\n", line);
 	if (line != NULL)
 	{
 		//printf("IIIIIIIIIN: %s\n", line);
 		if (line)
 			temp = remove_spaces(line);
-		//printf("IN: %s.\n", temp);
+		//printf("IN: %s", temp);
 		if (temp != NULL)
 		{
 			//printf("IM IN TEMP\n");
 			mlx->map.size_y++;
-			if (line && (int)ft_strlen(temp) > mlx->map.size_x)
-				mlx->map.size_x = ft_strlen(temp);
+			if (line && (int)ft_strlen(temp) - 1 > mlx->map.size_x)
+				mlx->map.size_x = ft_strlen(temp) - 1;
 			if (line)
 				ft_mlx_lines_2(mlx, temp);
-			if (line && (int)ft_strlen(temp) != 0 && flag == -1)
+			if (line && (int)ft_strlen(temp) - 1 != 0 && mlx->map.flag_null == -1)
 				ft_char_error(&mlx->map, ' ', -1, EMPTY_LINE);
 		}
 		else
-			flag = -1;
+			mlx->map.flag_null = -1;
 	}
-	//if (temp == NULL)
-	//	mlx->map.size_y--;
 	//printf("Size y: %d\nSize x: %d\n", mlx->map.size_y, mlx->map.size_x);
 }
 
@@ -244,7 +134,7 @@ void	ft_print_matrix(t_mlx *mlx)
 	while (i < mlx->map.size_y)
 	{
 		//printf("wtf\n");
-		printf("%s\n", mlx->map.matrix[i]);
+		printf("%s", mlx->map.matrix[i]);
 		i++;
 	}
 }
@@ -256,6 +146,7 @@ void init_map(t_mlx *mlx)
 	mlx->map.start = 0;
 	mlx->map.start_line = 0;
 	mlx->map.flag = 0;
+	mlx->map.flag_null = 0;
 }
 
 //save_map coud make it work for mlx->map and map
@@ -280,12 +171,12 @@ void	ft_all_map(t_mlx *mlx)
 	mlx->map.fd = open(mlx->map.name, O_RDONLY);
 	mlx->map.matrix = ft_save_map(mlx);
 	close (mlx->map.fd);
-	printf("WTF3\n");
+	//printf("WTF3\n");
 	ft_validate(&mlx->map);
 	//printf("WTF4\n");
 	ft_free_matrix(mlx->map.matrix);
 	mlx->map.fd = open(mlx->map.name, O_RDONLY);
 	mlx->map.matrix = ft_save_map(mlx);
 	close (mlx->map.fd);
-	ft_print_matrix(mlx);
+	//ft_print_matrix(mlx);
 }

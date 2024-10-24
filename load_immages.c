@@ -1,5 +1,38 @@
 #include "cub3d.h"
 
+void	ft_xpm_name(char *xpm)
+{
+	int	len;
+
+	len = ft_strlen(xpm);
+	if (xpm[len - 1] == 'm' && xpm[len - 2] == 'p'
+		&& xpm[len - 3] == 'x' && xpm[len - 4] == '.')
+		return ;
+	ft_print_error("Archivo de textura no es .xpm");
+}
+
+char	*ft_previous_check_xpm(char *str)
+{
+	int	len;
+	int	check;
+
+	len = strlen(str);
+	len--;
+	check = len;
+	//printf("LEN: %d\n", len);
+	while (str[len] == ' ')
+		len--;
+	if (len == check)
+	{
+		ft_xpm_name(str);
+		return (str);
+	}
+	//printf("LEN: %d\n", len);
+	str[len + 1] = '\0';
+	ft_xpm_name(str);
+	return (str);
+}
+
 void	make_image_from_xpm(void *mlx_ptr, t_img *img, char *xpm)
 {
 	if (!mlx_ptr || !img || !xpm)
@@ -13,14 +46,15 @@ void	make_image_from_xpm(void *mlx_ptr, t_img *img, char *xpm)
 
 void	save_xpm(t_mlx *mlx)
 {
-	//Hacer esta comprobacion pero donde toca
-	if (mlx->ptr == NULL)
-		ft_print_error("Failed to initialize MLX");
-
-	printf("Loading NO texture: %s\n", mlx->path.NO_path);
+	mlx->path.NO_path = ft_previous_check_xpm(mlx->path.NO_path);
+	mlx->path.EA_path = ft_previous_check_xpm(mlx->path.EA_path);
+	mlx->path.SO_path = ft_previous_check_xpm(mlx->path.SO_path);
+	mlx->path.WE_path = ft_previous_check_xpm(mlx->path.WE_path);
+	
+/* 	printf("Loading NO texture: %s\n", mlx->path.NO_path);
 	printf("Loading EA texture: %s\n", mlx->path.EA_path);
 	printf("Loading SO texture: %s\n", mlx->path.SO_path);
-	printf("Loading WE texture: %s\n", mlx->path.WE_path);
+	printf("Loading WE texture: %s\n", mlx->path.WE_path); */
 
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_no, mlx->path.NO_path);
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_ea, mlx->path.EA_path);

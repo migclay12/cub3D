@@ -55,6 +55,7 @@ typedef struct s_map
 	char		*line_start_map;
 	int			start_line;
 	int			flag; //temporal para las coordenadas
+	int			flag_null;
 	t_player	player;
 }	t_map;
 
@@ -68,6 +69,7 @@ typedef struct s_wall_path
 	char *F_color;
 } t_wall_path;
 
+//probably need to do a new one to put less shit in this one
 typedef struct s_ray
 {
 	double	x;

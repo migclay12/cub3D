@@ -27,7 +27,7 @@ void put_px(int x, int y, int color, t_img *img)
     *(unsigned int*)dst = color;
 }
 
-
+//Aprender y reajustar esta funcion
 // Bresenham's Line Algorithm
 void line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color)
 {
@@ -40,7 +40,8 @@ void line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color)
 	while (1)
 	{
 		put_px(x0, y0, color, &mlx->img); // Draw the pixel
-		if (x0 == x1 && y0 == y1) break; // Stop if we reach the endpoint
+		if (x0 == x1 && y0 == y1)
+			break; // Stop if we reach the endpoint
 		int err2 = err * 2;
 		// Error check for x direction
 		if (err2 > -dy)
@@ -57,15 +58,19 @@ void line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color)
 	}
 }
 
-void draw_arrow(t_mlx *mlx)
+//This function is cursed when norminette...
+void draw_arrow(t_mlx *mlx, t_shape s)
 {
-	float angle = mlx->player.angle - M_PI_2;
+	float angle = mlx->player.angle;
 	float dir_x = cos(angle);
 	float dir_y = sin(angle);
 
-	float length = 40.0; // Length of the arrow
-	int center_x = mlx->player.plyr_x;
-	int center_y = mlx->player.plyr_y;
+	float length = BLOCK_SIZE_MAP - 4; // Length of the arrow
+	//int center_x = mlx->player.plyr_x;
+	//int center_y = mlx->player.plyr_y;
+
+	int center_y = (int)(mlx->player.plyr_y / (BLOCK_SIZE_MAP / 4) - s.width + BLOCK_SIZE_MAP / 2);
+	int center_x = (int)(mlx->player.plyr_x / (BLOCK_SIZE_MAP / 4) - s.height + BLOCK_SIZE_MAP / 2);
 
 	// Calculate the endpoint of the direction line
 	int end_x = (int)(center_x + dir_x * length);
@@ -74,7 +79,7 @@ void draw_arrow(t_mlx *mlx)
 	// Draw a line indicating the direction
 	line(mlx, center_x, center_y, end_x, end_y, 0x1630BE);
 
-	float arrow_size = 8.0; // Size of the arrowhead
+	float arrow_size = 6.0; // Size of the arrowhead
 	float arrow_angle = M_PI / 8; // Angle for the arrowhead
 
 	// Calculate the left side of the arrowhead
