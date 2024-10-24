@@ -15,8 +15,6 @@
 void	ft_print_error(char *str)
 {
 	printf("Error, %s\n", str);
-	//Borrar est \n
-	printf("\n");
 	exit(0);
 }
 
@@ -32,8 +30,6 @@ void	ft_char_error(t_map *map, char c, int i, int error)
 		printf("%s: the starting point is missing in the map\n", map->name);
 	else
 	{
-		//printf("Error, invalid char in map '%c' at %d:%d\n",
-			//c, map->size_y, i + 1);
 		printf("%s: %d:%d: invalid char in map '%c'\n",
 			map->name, map->size_y, i + 1, c);
 	}

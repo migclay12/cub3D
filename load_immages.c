@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_immages.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ablanco- <ablanco-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/24 19:53:00 by ablanco-          #+#    #+#             */
+/*   Updated: 2024/10/24 19:58:04 by ablanco-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	ft_xpm_name(char *xpm)
@@ -19,7 +31,6 @@ char	*ft_previous_check_xpm(char *str)
 	len = strlen(str);
 	len--;
 	check = len;
-	//printf("LEN: %d\n", len);
 	while (str[len] == ' ')
 		len--;
 	if (len == check)
@@ -27,7 +38,6 @@ char	*ft_previous_check_xpm(char *str)
 		ft_xpm_name(str);
 		return (str);
 	}
-	//printf("LEN: %d\n", len);
 	str[len + 1] = '\0';
 	ft_xpm_name(str);
 	return (str);
@@ -50,19 +60,14 @@ void	save_xpm(t_mlx *mlx)
 	mlx->path.EA_path = ft_previous_check_xpm(mlx->path.EA_path);
 	mlx->path.SO_path = ft_previous_check_xpm(mlx->path.SO_path);
 	mlx->path.WE_path = ft_previous_check_xpm(mlx->path.WE_path);
-	
 /* 	printf("Loading NO texture: %s\n", mlx->path.NO_path);
 	printf("Loading EA texture: %s\n", mlx->path.EA_path);
 	printf("Loading SO texture: %s\n", mlx->path.SO_path);
 	printf("Loading WE texture: %s\n", mlx->path.WE_path); */
-
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_no, mlx->path.NO_path);
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_ea, mlx->path.EA_path);
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_so, mlx->path.SO_path);
 	make_image_from_xpm(mlx->ptr, &mlx->ray.wall_we, mlx->path.WE_path);
-
-//	if (mlx->ray.wall_no.ptr == NULL || mlx->ray.wall_ea.ptr == NULL || mlx->ray.wall_so.ptr == NULL || mlx->ray.wall_we.ptr == NULL)
-//		ft_print_error("Image not loaded properly");
 	if (mlx->ray.wall_no.ptr == NULL)
 		ft_print_error("Image not loaded properly NO");
 	if (mlx->ray.wall_ea.ptr == NULL)
