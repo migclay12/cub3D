@@ -6,7 +6,7 @@
 /*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 13:57:22 by miggonza          #+#    #+#             */
-/*   Updated: 2024/10/24 13:41:54 by miggonza         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:55:08 by miggonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,15 +300,15 @@ void draw_wall_ew(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 		while (dy < draw_height)
 		{
 			tx = (int)((int)ray->ray_y[num] % img->w);
-			if (tx >= img->w)
+		/* 	if (tx >= img->w)
 				tx = img->w - 1;
 			if (tx < 0)
-				tx = 0;
+				tx = 0; */
 			ty = (int)(((double)dy / draw_height) * img->h);
-			if (ty >= img->h)
+	/* 		if (ty >= img->h)
 				ty = img->h - 1;
 			if (ty < 0)
-				ty = 0;
+				ty = 0; */
 			pixel = get_pixel_img(img, tx, ty);
 			put_px(start_x + dx, wall_start + dy, pixel, &mlx->img);
 			dy++;
@@ -341,7 +341,7 @@ void draw_wall_ns(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 				tx = img->w - 1;
 			if (tx < 0)
 				tx = 0;
-			ty = (int)(((double)dy / draw_height) * img->h);
+			ty = (int)(((double)dy / mlx->ray.wall_height) * img->h);
 			if (ty >= img->h)
 				ty = img->h - 1;
 			if (ty < 0)
@@ -349,6 +349,7 @@ void draw_wall_ns(t_mlx *mlx, t_ray *ray, int start_x, int wall_start, int wall_
 			pixel = get_pixel_img(img, tx, ty);
 			put_px(start_x + dx, wall_start + dy, pixel, &mlx->img);
 			dy++;
+			//dy = ((mlx->ray.wall_height - S_H) / 2) * (64 / mlx->ray.wall_height);
 		}
 		dx++;
 	}
@@ -376,10 +377,10 @@ void draw_walls(t_mlx *mlx)
 			int wall_start = (S_H / 2) - (mlx->ray.wall_height / 2);
 			int wall_end = (S_H / 2) + (mlx->ray.wall_height / 2);
 
-			if (wall_start < 0)
+		/* 	if (wall_start < 0)
 				wall_start = 0;
 			if (wall_end > S_H)
-				wall_end = S_H;
+				wall_end = S_H; */
 			j = 0;
 			while (j <= S_H)
 			{
