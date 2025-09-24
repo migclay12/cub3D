@@ -1,11 +1,9 @@
-NO             NOtextures/simonkraft/wet_sponge.xpm
-SO SOtextures/simonkraft/wet_sponge.xpm
-WE                   WEtextures/simonkraft/wet_sponge.xpm
-
-EA EAtextures/simonkraft/wet_sponge.xpm
-F    11      F164,169,20
-
-C  C153,204,255
+NO textures/greystone.xpm
+SO textures/greystone.xpm
+WE textures/greystone.xpm
+EA textures/greystone.xpm
+F 164,169,20
+C 153,204,255
 
 
 11111111

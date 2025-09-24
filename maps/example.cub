@@ -1,0 +1,37 @@
+# Cub3D Map Configuration Example
+# This file demonstrates the proper format for cub3d maps
+
+# Wall Textures (Required)
+# Format: [Direction] [path_to_texture.xpm]
+NO textures/eagle.xpm      # North wall texture
+SO textures/bluestone.xpm  # South wall texture  
+EA textures/purplestone.xpm # East wall texture
+WE textures/mossy.xpm      # West wall texture
+
+# Colors (Required)
+# Format: [Floor/Ceiling] [R,G,B] (0-255)
+F 220,100,20              # Floor color (RGB)
+C 135,206,235             # Ceiling color (RGB)
+
+# Map Layout (Required)
+# Rules:
+# - 1 = wall (required to surround the map)
+# - 0 = empty space (walkable area)
+# - N/E/S/W = player spawn point (exactly one required)
+# - Spaces are allowed but will be treated as empty
+# - Map must be completely enclosed by walls
+
+1111111111111111111111111
+1000000000110000000000001
+1011000001110000000000001
+1001000000000000000000001
+111111111011000001110000000000001
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+11000000110101011100000000001
+10000000000000001100000010001
+10000000000000001101010010001
+11000001110101011111011110N0111
+11110111 1110101 101111010001
+11111111 1111111 111111111111

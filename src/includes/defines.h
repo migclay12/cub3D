@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miggonza <miggonza@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/29 12:07:44 by miggonza          #+#    #+#             */
+/*   Updated: 2024/10/29 12:07:44 by miggonza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef DEFINES_H
+# define DEFINES_H
+
+# define VAL_CHAR	" 01NESW"
+# define P_STARTS	"NESW"
+# define OPEN_WALL	" 1X\n"
+# define MAP_MLX	"01P"
+# define PLAYER_N	'N'
+# define PLAYER_E	'E'
+# define PLAYER_S	'S'
+# define PLAYER_W	'W'
+# define PLAYER_MLX	'P'
+
+//Key hooks
+# define KEY_ESC	65307
+# define KEY_LEFT	65361
+# define KEY_RIGHT	65363
+# define KEY_W		119
+# define KEY_A		97
+# define KEY_S		115
+# define KEY_D		100
+
+# define S_W		1920
+# define S_H		1200
+
+# define BLOCK_SIZE		64
+# define MOVE_SPEED		3
+# define ROTATION_SPEED	0.10
+# define NUM_RAYS		1920
+# define FOV			1.3962634016
+
+#endif

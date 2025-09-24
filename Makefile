@@ -1,23 +1,64 @@
-NAME = cub3d
-SRC_DIRS = .
-INC_DIR = includes
+NAME = cub3D
+SRC_DIRS = src
+INC_DIR = src/includes
 
-SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+NAME_BONUS = cub3D_bonus
+SRC_DIRS_BONUS = bonus
+INC_DIR_BONUS = bonus/includes
+
+SRCS =	src/coordenadas.c \
+		src/coordenadas_utils.c \
+		src/draw_ray.c \
+		src/errors.c \
+		src/free.c \
+		src/hooks.c \
+		src/hooks_utils.c \
+		src/init_graphics.c \
+		src/init_player.c \
+		src/load_immages.c \
+		src/main.c \
+		src/map_check.c \
+		src/map_check_utils.c \
+		src/raycasting.c \
+		src/ray_utils.c \
+		src/rgb.c \
+		src/rgb_utils.c \
+		src/utils.c \
+		src/val_path.c
+
+
+SRCS_BONUS =	bonus/coordenadas.c \
+				bonus/coordenadas_utils.c \
+				bonus/draw_ray.c \
+				bonus/errors.c \
+				bonus/free.c \
+				bonus/hooks.c \
+				bonus/hooks_utils.c \
+				bonus/init_graphics.c \
+				bonus/init_player.c \
+				bonus/load_immages.c \
+				bonus/main.c \
+				bonus/map_check.c \
+				bonus/map_check_utils.c \
+				bonus/minimap.c \
+				bonus/minimap_utils.c \
+				bonus/raycasting.c \
+				bonus/ray_utils.c \
+				bonus/rgb.c \
+				bonus/rgb_utils.c \
+				bonus/utils.c \
+				bonus/val_path.c \
+
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-FLAGS = -Wall -Wextra #-Werror -o3 #-g3  -fsanitize=address,leak
+FLAGS = -Wall -Wextra -Werror -O3 -g3
 FLAGS += -I includes
 FLAGS_MLX =  -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-#FLAGS_MLX = -Iinclude -ldl -lglfw -pthread -lm
-
 
 MLX_PATH	= minilibx-linux/
 MLX_NAME	= libmlx.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
-
-#MLX_PATH	= MLX42/build/
-#MLX_NAME	= libmlx42.a
-#MLX			= $(MLX_PATH)$(MLX_NAME)
 
 LIB = libft
 
@@ -25,14 +66,20 @@ all: $(NAME)
 
 $(NAME): $(OBJS) | $(LIB)/libft.a
 	@gcc $(FLAGS) $^ -o $@ -L $(LIB) -lft $(MLX) $(FLAGS_MLX)
-	@echo "cub3D compiled!"
+	@echo "✅ cub3D compiled successfully!"
+
+help:
+	@echo "Available targets:"
+	@echo "  all      - Build the main cub3D executable"
+	@echo "  bonus    - Build the bonus version with minimap"
+	@echo "  clean    - Remove object files"
+	@echo "  fclean   - Remove all generated files"
+	@echo "  re       - Rebuild everything"
+	@echo "  help     - Show this help message"
 
 $(LIB)/libft.a:
 	@make -C $(LIB) > /dev/null
 	@echo "Libft compiled!"
-
-#$(MLX):
-#	make -sC $(MLX_PATH)
 
 $(MLX)/libmlx.a:
 	@make -C $(MLX) > /dev/null
@@ -42,59 +89,20 @@ $(MLX)/libmlx.a:
 	@echo "Compiling $<..."
 	@gcc $(FLAGS) $(FLAGS_MLX) -c $< -o $@ -I includes
 
-#ive modified a bit the subject map
-bad: all
-	@./$(NAME) maps/bad/color_invalid_rgb.cub
-	@./$(NAME) maps/bad/color_missing_ceiling_rgb.cub
-	@./$(NAME) maps/bad/color_missing_floor_rgb.cub
-	@./$(NAME) maps/bad/color_missing.cub
-	@./$(NAME) maps/bad/color_none.cub
-	@./$(NAME) maps/bad/empty.cub
-	@./$(NAME) maps/bad/file_letter_end.cub	
-	@./$(NAME) maps/bad/filetype_missing
-	@./$(NAME) maps/bad/filetype_wrong.buc
-#	@./$(NAME) maps/bad/forbidden.cub
-	@./$(NAME) maps/bad/map_first.cub
-	@./$(NAME) maps/bad/map_middle.cub
-	@./$(NAME) maps/bad/map_missing.cub
-	@./$(NAME) maps/bad/map_only.cub
-	@./$(NAME) maps/bad/map_too_small.cub
-	@./$(NAME) maps/bad/player_multiple.cub
-	@./$(NAME) maps/bad/player_none.cub
-#	@./$(NAME) maps/bad/player_on_edge.cub
-	@./$(NAME) maps/bad/textures_dir.cub
-	@./$(NAME) maps/bad/textures_duplicates.cub
-	@./$(NAME) maps/bad/textures_forbidden.cub
-	@./$(NAME) maps/bad/textures_invalid.cub
-	@./$(NAME) maps/bad/textures_missing.cub
-	@./$(NAME) maps/bad/textures_none.cub
-	@./$(NAME) maps/bad/textures_not_xpm.cub
-	@./$(NAME) maps/bad/wall_hole_east.cub
-#	@./$(NAME) maps/bad/wall_hole_north.cub
-#	@./$(NAME) maps/bad/wall_hole_south.cub
-	@./$(NAME) maps/bad/wall_hole_west.cub
-	@./$(NAME) maps/bad/wall_none.cub
+bonus: $(NAME_BONUS)
 
-exe: all
-	@./$(NAME) maps/map_campus.cub
-#	@./$(NAME) maps/good/subject_map.cub
-#	@./$(NAME) maps/good/cheese_maze.cub
-#	@./$(NAME) maps/map0.cub
-
-leaks: all
-	valgrind --leak-check=full --track-origins=yes ./$(NAME) maps/map_campus.cub
-
-#--track-origins=yes
-#--show-leak-kinds=all
+$(NAME_BONUS): $(OBJS_BONUS) | $(LIB)/libft.a
+	@gcc $(FLAGS) $^ -o $@ -L $(LIB) -lft $(MLX) $(FLAGS_MLX)
+	@echo "✅ cub3D bonus compiled successfully!"
 
 clean:
-	@$(RM) $(OBJS) $(DEPS)
+	@$(RM) $(OBJS) $(OBJS_BONUS) $(DEPS)
 	@echo "cub3D cleaned!"
 	@make -C $(LIB) clean > /dev/null
 	@echo "Libft cleaned!"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_BONUS) 
 	@make -C $(LIB) fclean > /dev/null
 
 re: fclean all

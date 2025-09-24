@@ -1,0 +1,56 @@
+# Compiled binaries
+cub3d
+cub3D
+cub3D_bonus
+*.o
+*.a
+
+# Object files
+obj/
+*.obj
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Core dumps
+core
+core.*
+
+# Valgrind output
+vgcore.*
+
+# Test outputs
+test_output/
+*.test
+
+# Documentation build
+docs/_build/

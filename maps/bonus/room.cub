@@ -1,0 +1,19 @@
+NO  textures/blue_wall.xpm            
+SO  textures/deep_wall.xpm
+WE  textures/ninja_wall.xpm
+EA  textures/scale_wall.xpm         
+ 
+
+F 254   ,    255,255
+
+C 0,0,0
+
+111111111
+101000101
+10D000101
+1011D1101
+100000001
+1110N0111
+100000001
+100000001
+111111111

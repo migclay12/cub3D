@@ -39,7 +39,7 @@ typedef struct s_mlx_img
 	int		h;
 	void	*ptr;
 	char	*addr;
-	int		bpp; //investigar que es esto
+	int		bpp;
 	int		line;
 	int		end;
 }	t_img;
@@ -54,7 +54,7 @@ typedef struct s_map
 	char		**matrix;
 	char		*line_start_map;
 	int			start_line;
-	int			flag; //temporal para las coordenadas
+	int			flag;
 	int			flag_null;
 	t_player	player;
 }	t_map;
@@ -69,7 +69,7 @@ typedef struct s_wall_path
 	char *F_color;
 } t_wall_path;
 
-//probably need to do a new one to put less shit in this one
+// Ray structure for raycasting calculations
 typedef struct s_ray
 {
 	double	x;
